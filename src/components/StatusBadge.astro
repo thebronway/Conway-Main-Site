@@ -1,0 +1,89 @@
+---
+const { status } = Astro.props;
+
+const normalizedStatus = status ? status.toLowerCase() : 'planning';
+
+const styles = {
+  // 1. PRODUCTION (Green)
+  'production': { 
+    bg: 'rgba(16, 185, 129, 0.1)',  
+    text: '#34d399', 
+    border: 'rgba(16, 185, 129, 0.2)', 
+    label: 'Production' 
+  },
+  
+  // 2. ACTIVE DEVELOPMENT (Blue)
+  'active development': { 
+    bg: 'rgba(56, 189, 248, 0.1)',  
+    text: '#38bdf8', 
+    border: 'rgba(56, 189, 248, 0.2)', 
+    label: 'Active Development' 
+  },
+  
+  // 3. PLANNING (Yellow)
+  'planning': { 
+    bg: 'rgba(251, 191, 36, 0.1)',  
+    text: '#fbbf24', 
+    border: 'rgba(251, 191, 36, 0.2)', 
+    label: 'Planning' 
+  },
+
+  // 4. PAUSED (Slate)
+  'paused': { 
+    bg: 'rgba(148, 163, 184, 0.1)', 
+    text: '#94a3b8', 
+    border: 'rgba(148, 163, 184, 0.2)', 
+    label: 'Paused' 
+  },
+
+  // 5. ARCHIVED (Slate)
+  'archived': { 
+    bg: 'rgba(148, 163, 184, 0.1)', 
+    text: '#94a3b8', 
+    border: 'rgba(148, 163, 184, 0.2)', 
+    label: 'Archived' 
+  },
+  
+  // 6. CANCELLED (Red)
+  'cancelled': { 
+    bg: 'rgba(148, 163, 184, 0.1)', 
+    text: '#94a3b8', 
+    border: 'rgba(148, 163, 184, 0.2)', 
+    label: 'Cancelled' 
+  }
+};
+
+// Fallback logic
+const currentStyle = styles[normalizedStatus] || styles.planning;
+---
+
+<span class="badge" style={`
+  background: ${currentStyle.bg}; 
+  color: ${currentStyle.text}; 
+  border-color: ${currentStyle.border};
+`}>
+  <span class="dot" style={`background: ${currentStyle.text}`}></span>
+  {currentStyle.label}
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+</style>

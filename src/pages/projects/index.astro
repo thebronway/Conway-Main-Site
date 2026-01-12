@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CardProject from '../../components/CardProject.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+
+const sortOrder = { 
+  'Production': 1, 
+  'Active Development': 2, 
+  'Planning': 3, 
+  'Paused': 4,
+  'Archived': 5, 
+  'Cancelled': 6 
+};
+
+const sortedProjects = projects.sort((a, b) => (sortOrder[a.data.status] || 99) - (sortOrder[b.data.status] || 99));
+---
+
+<BaseLayout title="All Projects">
+  <Breadcrumbs title="Projects" />
+  <h1>All Projects</h1>
+  <div class="grid">
+    {sortedProjects.map(p => <CardProject project={p} />)}
+  </div>
+</BaseLayout>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+</style>

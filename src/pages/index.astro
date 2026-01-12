@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CardProject from '../components/CardProject.astro';
+import CardSite from '../components/CardSite.astro';
+import { getCollection } from 'astro:content';
+
+// 1. Fetch all collections
+const projects = await getCollection('projects');
+const sites = await getCollection('sites');
+const posts = await getCollection('blog');
+
+// 2. Sort Projects & Sites
+const sortOrder = { 
+  'Production': 1, 
+  'Active Development': 2, 
+  'Planning': 3, 
+  'Paused': 4,
+  'Archived': 5, 
+  'Cancelled': 6 
+};
+
+// Use safe access to prevent crashes if a status is missing
+const sortedProjects = projects.sort((a, b) => (sortOrder[a.data.status] || 99) - (sortOrder[b.data.status] || 99));
+const sortedSites = sites.sort((a, b) => (sortOrder[a.data.status] || 99) - (sortOrder[b.data.status] || 99));
+
+// 3. Sort Blog Posts (Newest First) and limit to 5
+const recentPosts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
+---
+
+<BaseLayout title="Main Hub">
+  
+  <section class="about-section">
+    <h1>Hi, I'm Brian.</h1>
+    <p class="bio">
+      I like to build things to make my life more efficient and effective.<br />
+      This hub is a collection of my published, in-progress, and archived projects aiming to accomplish just that.<br />
+      It also serves as a showcase of my technical program, project, and product management skills.<br />
+      On most of these projects, I’m the client, designer, builder, tester, and end user.<br />
+      Owning the work end to end, taking ideas and bringing them to production, 0 to 1. <br />
+      I leverage AI tools daily to solve problems and help build and test the projects you see below.
+    </p>
+     <p class="bio">Feel free to reach out.</p>
+    <div class="links">
+      <a href="/Conway_Resume.pdf" class="link-item">📄 Résumé</a>
+      <a href="mailto:brian@conway.im" class="link-item">✉️ brian@conway.im</a>
+      <a href="https://github.com/thebronway" target="_blank" class="link-item">🐙 GitHub</a>
+      <a href="https://hub.docker.com/u/thebronway" target="_blank" class="link-item">🐳 Dockerhub</a>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <h2>Projects</h2>
+    <div class="grid">
+      {sortedProjects.map(p => <CardProject project={p} />)}
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="sites-section">
+    <h2>Sites</h2>
+    <div class="grid">
+      {sortedSites.map(s => <CardSite site={s} />)}
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="blog-section">
+    <div class="blog-header">
+      <h2>Recent Blog Posts</h2>
+      <a href="/blog/" class="view-all">View All →</a>
+    </div>
+    
+    <ul class="post-list">
+      {recentPosts.map(post => (
+        <li>
+          <a href={`/blog/${post.slug}/`} class="post-link">
+            <span class="title">{post.data.title}</span>
+            <span class="date">{post.data.pubDate.toLocaleDateString()}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Hero Styles */
+  .about-section { margin-bottom: 3rem; margin-top: 1rem; }
+  h1 { font-size: 3rem; margin-bottom: 1.5rem; color: #fff; line-height: 1; }
+  .bio { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6; max-width: none; }
+  .links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .link-item { color: #fff; font-weight: 600; border-bottom: 1px solid transparent; font-size: 1.1rem; }
+  .link-item:hover { border-bottom-color: var(--accent); }
+
+  /* Dividers */
+  .divider { margin: 4rem 0; border: 0; border-top: 1px solid var(--border); }
+  
+  /* Section Headers */
+  h2 { margin-bottom: 1.5rem; color: #fff; font-size: 1.8rem; }
+  
+  /* Grid Layouts */
+  .grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 1.5rem; 
+  }
+
+  /* Blog Section Styles */
+  .blog-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; }
+  .view-all { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+  .view-all:hover { color: var(--accent); }
+
+  .post-list { list-style: none; padding: 0; }
+  .post-list li { margin-bottom: 0.75rem; }
+  
+  /* STYLED TO MATCH BLOG PAGE BAR */
+  .post-link { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 1rem; 
+    background: var(--card-bg); 
+    border-radius: 8px; 
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s;
+    text-decoration: none;
+  }
+  .post-link:hover { transform: translateY(-2px); border-color: #475569; }
+  
+  .title { font-weight: 600; color: #fff; font-size: 1.05rem; }
+  .date { color: var(--text-muted); font-size: 0.85rem; font-family: monospace; }
+</style>

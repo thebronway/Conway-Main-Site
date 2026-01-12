@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CardSite from '../../components/CardSite.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const sites = await getCollection('sites');
+
+const sortOrder = { 
+  'Production': 1, 
+  'Active Development': 2, 
+  'Planning': 3, 
+  'Paused': 4,
+  'Archived': 5, 
+  'Cancelled': 6 
+};
+
+const sortedSites = sites.sort((a, b) => (sortOrder[a.data.status] || 99) - (sortOrder[b.data.status] || 99));
+---
+
+<BaseLayout title="All Sites">
+  <Breadcrumbs title="Sites" />
+  <h1>Hosted Sites</h1>
+  <div class="grid">
+    {sortedSites.map(s => <CardSite site={s} />)}
+  </div>
+</BaseLayout>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+</style>

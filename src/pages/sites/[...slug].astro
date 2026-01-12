@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+export async function getStaticPaths() {
+  const sites = await getCollection('sites');
+  return sites.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const visitUrl = entry.data.url;
+---
+
+<BaseLayout title={entry.data.title}>
+  <Breadcrumbs type="sites" title={entry.data.title} />
+
+  <div class="hero-container">
+    {entry.data.heroImage && (
+      <img 
+        src={entry.data.heroImage} 
+        alt={entry.data.title} 
+        class="hero-image" 
+      />
+    )}
+
+    <div class="hero-content">
+      <div class="header">
+        <h1>{entry.data.title}</h1>
+        <StatusBadge status={entry.data.status} />
+      </div>
+
+      <p class="desc">{entry.data.description}</p>
+
+      {visitUrl && (
+         <a href={visitUrl} target="_blank" class="launch-btn">Visit Site ↗</a>
+      )}
+    </div>
+  </div>
+
+  <hr style="border-color: var(--border); margin: 2rem 0;" />
+
+  <article class="prose">
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  .hero-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-image {
+    width: 300px; /* Fixed width for card-like size */
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    flex-shrink: 0; /* Prevents image from squishing */
+  }
+
+  .hero-content {
+    flex: 1; /* Takes remaining space */
+  }
+
+  /* Responsive: Stack on small screens */
+  @media (max-width: 768px) {
+    .hero-container {
+      flex-direction: column;
+    }
+    .hero-image {
+      width: 100%;
+    }
+  }
+
+  .header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+  h1 { margin: 0; line-height: 1.2; } /* Tightened line height slightly */
+  .desc { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; margin-top: 0.5rem; }
+  .launch-btn { display: inline-block; background: #fff; color: #000; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: bold; }
+  .prose { line-height: 1.7; color: #cbd5e1; max-width: 100%; }
+  .prose :global(a) { color: var(--accent); }
+</style>

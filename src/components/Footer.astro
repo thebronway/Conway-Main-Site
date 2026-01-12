@@ -1,0 +1,27 @@
+---
+const today = new Date();
+---
+
+<footer>
+  <div class="content">
+    <p>
+      &copy; {today.getFullYear()} Brian Conway. All rights reserved.
+    </p>
+    </div>
+</footer>
+
+<style>
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    margin-top: auto; /* pushes footer to bottom */
+  }
+
+  .content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+</style>

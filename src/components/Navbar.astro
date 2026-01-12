@@ -1,0 +1,22 @@
+<nav>
+  <div class="logo"><a href="/">brian.conway.im</a></div>
+  <div class="links">
+    <a href="/projects/">Projects</a>
+    <a href="/sites/">Sites</a>
+    <a href="/blog/">Blog</a>
+  </div>
+</nav>
+
+<style>
+  nav { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 1.5rem 2rem; 
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.05em; }
+  .links a { margin-left: 1.5rem; color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
+  .links a:hover { color: var(--text-main); }
+</style>

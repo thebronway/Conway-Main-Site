@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<BaseLayout title="Blog">
+  <Breadcrumbs title="Blog" />
+  
+  <div class="blog-header">
+    <h1>Blog</h1>
+  </div>
+  
+  <ul class="post-list">
+    {sortedPosts.map(post => (
+      <li>
+        <a href={`/blog/${post.slug}/`} class="post-link">
+          <span class="title">{post.data.title}</span>
+          <span class="date">{post.data.pubDate.toLocaleDateString()}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  .blog-header { margin-bottom: 3rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+  h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: #fff; }
+  p { color: var(--text-muted); font-size: 1.1rem; }
+  .post-list { list-style: none; padding: 0; }
+  .post-list li { margin-bottom: 1rem; }
+  .post-link { 
+    display: flex; justify-content: space-between; align-items: baseline; padding: 1rem; 
+    background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border);
+    transition: transform 0.1s, border-color 0.1s;
+  }
+  .post-link:hover { transform: scale(1.01); border-color: #475569; }
+  .title { font-weight: bold; font-size: 1.1rem; color: #fff; }
+  .date { color: var(--text-muted); font-size: 0.9rem; font-family: monospace; }
+</style>

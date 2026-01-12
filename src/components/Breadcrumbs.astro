@@ -1,0 +1,32 @@
+---
+const { type, title } = Astro.props;
+// Type usually maps to the base URL (e.g., 'projects' -> /projects)
+const baseLink = type ? `/${type}` : '/';
+const typeLabel = type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Home';
+---
+
+<nav class="breadcrumbs">
+  <a href="/">Home</a>
+  <span class="sep">/</span>
+  {type && (
+    <>
+      <a href={baseLink}>{typeLabel}</a>
+      <span class="sep">/</span>
+    </>
+  )}
+  <span class="current">{title}</span>
+</nav>
+
+<style>
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .breadcrumbs a { color: var(--text-muted); transition: color 0.2s; }
+  .breadcrumbs a:hover { color: var(--accent); }
+  .sep { margin: 0 0.5rem; color: #475569; }
+  .current { color: var(--text-main); font-weight: 500; }
+</style>

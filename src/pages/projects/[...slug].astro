@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const visitUrl = entry.data.url;
+---
+
+<BaseLayout title={entry.data.title}>
+  <Breadcrumbs type="projects" title={entry.data.title} />
+
+  <div class="hero-container">
+    {entry.data.heroImage && (
+      <img 
+        src={entry.data.heroImage} 
+        alt={entry.data.title} 
+        class="hero-image" 
+      />
+    )}
+
+    <div class="hero-content">
+      <div class="project-header">
+        <h1>{entry.data.title}</h1>
+        <StatusBadge status={entry.data.status} />
+      </div>
+      
+      <p class="description">{entry.data.description}</p>
+
+      {entry.data.demoUrl && (
+        <a href={entry.data.demoUrl} target="_blank" class="launch-btn">Launch Demo ↗</a>
+      )}
+    </div>
+  </div>
+
+  <hr style="border-color: var(--border); margin: 2rem 0;" />
+
+  <article class="prose">
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  .hero-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-image {
+    width: 300px; /* Fixed width for card-like size */
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    flex-shrink: 0; /* Prevents image from squishing */
+  }
+
+  .hero-content {
+    flex: 1; /* Takes remaining space */
+  }
+
+  /* Responsive: Stack on small screens */
+  @media (max-width: 768px) {
+    .hero-container {
+      flex-direction: column;
+    }
+    .hero-image {
+      width: 100%;
+    }
+  }
+
+  .project-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+  h1 { margin: 0; line-height: 1.2; }
+  .description { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; margin-top: 0.5rem; }
+  .launch-btn { 
+    display: inline-block; 
+    background: #fff; 
+    color: #0f172a; 
+    padding: 0.6rem 1.2rem; 
+    border-radius: 6px; 
+    font-weight: bold; 
+    text-decoration: none;
+  }
+  .launch-btn:hover { opacity: 0.9; }
+  
+  .prose { line-height: 1.7; color: #cbd5e1; max-width: 100%; }
+  .prose :global(h2) { margin-top: 2rem; color: #fff; }
+  .prose :global(a) { color: var(--accent); }
+</style>
