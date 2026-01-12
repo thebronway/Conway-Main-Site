@@ -9,7 +9,7 @@ heroImage: "/images/thumbnails/MyLogbookVault-card.png"
 > **Note:** This project is its initial planning phase 
 
 ## Purpose
-The primary goal is to create a **self-hosted digital backup and visualization tool** for a pilot's logbook. While tools like ForeFlight are essential for active flight management, I wanted a way to own and visualize my flight data.
+The primary goal is to create a **self-hosted digital backup and visualization tool** for a pilot's logbook. While tools like ForeFlight are essential for active flight management, I wanted a way to own and visualize my historical flight data.
 
 This app is about backup and visualization. It aims to combine the utility of a logbook with the visual appeal of apps like *Flighty*, offering deep insights and a historical map of every mile flown.
 

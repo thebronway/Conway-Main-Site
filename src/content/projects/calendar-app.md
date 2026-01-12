@@ -16,37 +16,40 @@ heroImage: "/images/thumbnails/CalendarApp-card.png"
 ## Purpose
 I designed this calendar to be self-hosted and easily shared with friends and family. The goal is to keep everyone informed about my travel plans and availability so they can plan accordingly.
 
-* **Note:** I currently protect my personal instance behind **Nginx** and **Authentik**, and if you host this, please secure it someway.
+* **Note:** For production use, it is strongly recommended to protect your instance using a reverse proxy and authentication service (e.g., Nginx and Authentik).
 
-## Key Features
-* **Year-at-a-Glance:** View your entire year across all 12 months on a single page.
-* **Activity Tracking:** Easy editing to log locations, add notes, or assign activity icons.
-* **Customizable Key:** Fully configure your own travel categories (e.g., *Work, Personal, Sick Time*) and activities (e.g., *Flights, Beach Days*) with specific colors and icons.
-* **Stats Dashboard:** Built-in tracking for travel days and time spent away.
-* **Real-Time Sync:** Updates are pushed instantly to all connected clients via WebSockets.
-* **Responsive Design:** Optimized for mobile, tablet, and desktop views.
+## Features
+
+* **Year-at-a-Glance:** Visual dashboard for the entire year.
+* **Deep Customization:** Define color-coded categories and custom activity icons.
+* **Smart Tracking:** Log locations, rich text notes, and visualize travel stats.
+* **Interactive Filters:** Click stats or key items to highlight specific days instantly.
+* **Real-Time Sync:** Updates are pushed via WebSockets to all connected clients.
+* **Admin Mode:** Password-protected editing with a public read-only view.
+* **Responsive & Dark Mode:** Optimized for mobile with automatic dark theme support.
+
+## Screenshot
+
+<img src="/images/content/calendar-0.7-view.png" alt="Calendar Screenshot" width="600" alt="Calendar Screenshot">
 
 ## Development Roadmap
 
-### Current Version: v0.6
-
-### Upcoming Version: v0.7
-* **Focus:** Bug Fixes and Improvements
-* **Planned Changes:**
-    * Cleaning up documentation and README
-    * Unriad CA Template
+### Current Version: v0.7
 
 ### Upcoming Version: v0.8
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
     * Refinements and Testing
+    * Unriad CA Template
+    * Code hardening
+    * Remove some screenshots from README
 
-### Upcoming Version: v0.9
+### Upcoming Version: v0.9 (optional; no set release timeline)
 * **Focus:** Bug Fixes
 * **Planned Changes:**
     * Refinements and Testing
 
-### Upcoming Version: v1.0 (Production)
+### Upcoming Version: v1.0 (Production) (no set release timeline)
 * **Focus:** Final Touches
 * **Planned Changes:**
     * *No features or bug fixes are planned for this release.*
