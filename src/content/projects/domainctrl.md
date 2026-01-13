@@ -31,6 +31,10 @@ I designed this domain and certificate manager because I had so many different s
 1.  **SSL Lifecycle:** This app manages the full lifecycle of certificates. It can only renew certs it created. Existing certs should be replaced by ones generated here for auto-renewal.
 2.  **Authentication:** **This app has no login.** You MUST run this behind a reverse proxy (Nginx, Traefik, etc.) with Basic Auth or SSO to secure the dashboard.
 
+## Screenshot
+
+<img src="/images/content/domainctrl-0.5-dashboard.png" alt="Calendar Screenshot" width="800" alt="Calendar Screenshot">
+
 ## Development Roadmap
 
 > **Note:** This app will be rebuilt and updated regularly, in order to keep certbot updated.

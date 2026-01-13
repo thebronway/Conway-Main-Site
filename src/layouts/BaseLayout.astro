@@ -14,6 +14,16 @@ const {
   <head>
     <SEOHead title={title} description={description} image={image} />
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ7P529952"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XQ7P529952');
+    </script>
+
     <style is:global>
       /* THEME: Lighter Midnight Blue (Slate 900 Base) */
       :root {
