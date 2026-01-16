@@ -4,6 +4,7 @@ const statusEnum = z.enum([
   'Production', 
   'Active Development', 
   'Planning', 
+  'Concept',
   'Paused',
   'Archived', 
   'Cancelled'

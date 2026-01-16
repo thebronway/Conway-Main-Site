@@ -30,10 +30,11 @@ const visitUrl = entry.data.url;
     )}
 
     <div class="hero-content">
-      <div class="project-header">
-        <h1>{entry.data.title}</h1>
+      <div class="status-wrapper">
         <StatusBadge status={entry.data.status} />
       </div>
+
+      <h1>{entry.data.title}</h1>
       
       <p class="description">{entry.data.description}</p>
 
@@ -60,19 +61,14 @@ const visitUrl = entry.data.url;
   }
 
   .hero-image {
-    width: 300px; /* Fixed width for card-like size */
+    width: 300px;
     height: auto;
     border-radius: 12px;
     border: 1px solid var(--border);
     object-fit: cover;
-    flex-shrink: 0; /* Prevents image from squishing */
+    flex-shrink: 0;
   }
 
-  .hero-content {
-    flex: 1; /* Takes remaining space */
-  }
-
-  /* Responsive: Stack on small screens */
   @media (max-width: 768px) {
     .hero-container {
       flex-direction: column;
@@ -81,11 +77,33 @@ const visitUrl = entry.data.url;
       width: 100%;
     }
   }
+  
+  .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-  .project-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
-  h1 { margin: 0; line-height: 1.2; }
-  .description { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; margin-top: 0.5rem; }
+  .status-wrapper {
+    display: flex;
+    margin-bottom: 1rem; 
+  }
+
+  h1 {
+    margin: 0 0 0.25rem 0;
+    line-height: 1.1; 
+  }
+
+  .description {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0; 
+  }
+
   .launch-btn { 
+    align-self: flex-start; 
     display: inline-block; 
     background: #fff; 
     color: #0f172a; 
@@ -95,8 +113,4 @@ const visitUrl = entry.data.url;
     text-decoration: none;
   }
   .launch-btn:hover { opacity: 0.9; }
-  
-  .prose { line-height: 1.7; color: #cbd5e1; max-width: 100%; }
-  .prose :global(h2) { margin-top: 2rem; color: #fff; }
-  .prose :global(a) { color: var(--accent); }
 </style>

@@ -7,8 +7,6 @@ heroImage: "/images/thumbnails/FollowersCompare-card.png"
 ---
 # A Privacy Focused App to Analyze Instagram Followers
 
-> **Note:** This app is currently in production.
-
 ## Purpose
 A privacy-focused tool designed to analyze your Instagram connections. It allows you to compare your "Followers" vs. "Following" lists to identify who isn't following you back, while also tracking follower trends (gains and losses) over time using historical data.
 
@@ -23,9 +21,6 @@ A privacy-focused tool designed to analyze your Instagram connections. It allows
 ## Screenshots
 #### Instructions
 <img src="/images/content/followers-0.2-instructions.png" alt="Calendar Screenshot" width="600" alt="Site Instructions"> 
-
-#### Mutual Followers
-<img src="/images/content/followers-0.2-mutual.png" alt="Calendar Screenshot" width="600" alt="Mutual Followers">  
 
 #### Not Following Back
 <img src="/images/content/followers-0.2-not_following_back.png" alt="Calendar Screenshot" width="600" alt="Not Following Back">  

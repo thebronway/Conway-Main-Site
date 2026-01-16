@@ -7,7 +7,7 @@ heroImage: "/images/thumbnails/flyto25-card.png"
 ---
 # My jetBlue 25 for 25 Challenge Website Archive
 
-> **Note:** ✈️ Challenge Completed: The jetBlue FlyTo25 Challenge has ended. The site now serves as a permanent archive of my journey.
+> **Note:** Challenge Completed: The jetBlue FlyTo25 Challenge has ended. The site now serves as an archive of my journey.
 
 <img src="/images/content/flyto25-cover.png" style="width: 100%; max-width: 800px; height: auto;" alt="My jetBlue FlyTo25 25 for 25 Challenge Map" />
 

@@ -10,9 +10,10 @@ const sortOrder = {
   'Production': 1, 
   'Active Development': 2, 
   'Planning': 3, 
-  'Paused': 4,
-  'Archived': 5, 
-  'Cancelled': 6 
+  'Concept': 4, 
+  'Paused': 5,
+  'Archived': 6, 
+  'Cancelled': 7
 };
 
 const sortedProjects = projects.sort((a, b) => (sortOrder[a.data.status] || 99) - (sortOrder[b.data.status] || 99));

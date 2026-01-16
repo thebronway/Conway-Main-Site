@@ -1,12 +1,12 @@
 ---
-title: "StampAtlas (Public-Hosted)"
+title: "StampAtlas (Hosted)"
 description: "A Social Passport Travel App"
-status: "Planning"
+status: "Concept"
 heroImage: "/images/thumbnails/StampAtlas-card.png"
 ---
 # A Social Passport Travel App
 
-> **Note:** This site is its initial planning phase
+> **Note:** This site is its initial concept phase
 
 ## Purpose
 Buidling on the self-hosted version, the public-hosted version introduces a social layer. It connects collectors, enables verification of experiences, and creates a marketplace for unique, community-driven passports.

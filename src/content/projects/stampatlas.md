@@ -1,12 +1,12 @@
 ---
-title: "StampAtlas (Self-Hosted)"
+title: "StampAtlas"
 description: "A Self-Hosted Passport Travel App"
-status: "Planning"
+status: "Concept"
 heroImage: "/images/thumbnails/StampAtlas-card.png"
 ---
 # A Self-Hosted Passport Travel App
 
-> **Note:** This project is its initial planning phase
+> **Note:** This project is its initial concept phase
 
 ## Purpose
 A mobile-first web application designed for tracking travel experiences through digital Passports. The goal of the self-hosted version is to provide a private, local tool for travel enthusiasts to own and track their travel data without the noise of social media features.  Passports aren't just limited to regions like states or countries, but they are desgined to track just about anything.

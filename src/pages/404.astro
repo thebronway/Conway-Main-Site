@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 - Not Found">
+  <div class="error-container">
+    
+    <h1 class="big-404">404</h1>
+    
+    <h2 class="human-message">
+      Either you're on the wrong page,<br />
+      or I broke something.
+    </h2>
+    
+    <p class="explanation">
+      Let's be honest, it was probably me.
+    </p>
+
+    <a href="/" class="home-btn">
+      ← Go home
+    </a>
+  </div>
+</BaseLayout>
+
+<style>
+  .error-container {
+    /* Added relative positioning context */
+    position: relative;
+    /* Ensure foreground content sits on top */
+    z-index: 1;
+    text-align: center;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Increased min-height so there is room to move the 404 up */
+    min-height: 70vh;
+    overflow: hidden; /* Prevents scrollbar if 404 goes too high on small screens */
+  }
+
+  .big-404 {
+    /* ABSOLUTE POSITIONING - Moves it independently */
+    position: absolute;
+    top: 5%; /* Adjust this value to move it up or down */
+    left: 50%;
+    transform: translateX(-50%); /* Centers it horizontally */
+    z-index: -1; /* Puts it behind the text */
+    
+    /* Styling */
+    font-size: 12rem; /* Made it bigger for background effect */
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+    color: var(--text-muted);
+    opacity: 0.15; /* Slightly more subtle */
+  }
+
+  .human-message {
+    font-size: 2rem;
+    /* Removed negative margin-top, no longer needed */
+    margin-bottom: 1rem;
+    color: #fff;
+    /* Removed text-shadow, no longer needed for readability */
+  }
+
+  .explanation {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .home-btn {
+    display: inline-block;
+    background: #fff;
+    color: #0f172a;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+    /* Ensure button is clickable */
+    position: relative;
+    z-index: 2;
+  }
+
+  .home-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+</style>

@@ -29,7 +29,7 @@ I designed this domain and certificate manager because I had so many different s
 ## Important Notes
 
 1.  **SSL Lifecycle:** This app manages the full lifecycle of certificates. It can only renew certs it created. Existing certs should be replaced by ones generated here for auto-renewal.
-2.  **Authentication:** **This app has no login.** You MUST run this behind a reverse proxy (Nginx, Traefik, etc.) with Basic Auth or SSO to secure the dashboard.
+2.  **Authentication:** **This app has no built authentication.** If you choose to expose this to the internet, it is strongly, strongly, super strongly recommended to protect your instance using a reverse proxy and authentication service (e.g., Nginx and Authentik).
 
 ## Screenshot
 
@@ -52,7 +52,7 @@ I designed this domain and certificate manager because I had so many different s
 ### Upcoming Version: v0.7
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * Adding other DDNS proivders (Cloudflare, Google, etc.)
+    * Adding other DNS proivders (Cloudflare, DuckDNS, Azure DNS, Google Cloud DNS are planned)
     * Code cleanup
 
 ### Upcoming Version: v0.8

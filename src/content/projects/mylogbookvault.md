@@ -1,12 +1,12 @@
 ---
 title: "MyLogbookVault"
 description: "A Pilots Self-Hosted Digital Logbook Backup and Stats"
-status: "Planning"
+status: "Concept"
 heroImage: "/images/thumbnails/MyLogbookVault-card.png"
 ---
 # A Pilots Self-Hosted Digital Logbook Backup and Stats
 
-> **Note:** This project is its initial planning phase 
+> **Note:** This project is its initial concept phase 
 
 ## Purpose
 The primary goal is to create a **self-hosted digital backup and visualization tool** for a pilot's logbook. While tools like ForeFlight are essential for active flight management, I wanted a way to own and visualize my historical flight data.

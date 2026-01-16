@@ -12,14 +12,14 @@ const detailsUrl = `/sites/${site.slug}/`;
     </a>
   )}
   <div class="content">
-    <a href={detailsUrl} class="title-link">
-      <h3 class="title">{title}</h3>
-    </a>
-    
     <div class="status-wrapper">
       <StatusBadge status={status} />
     </div>
 
+    <a href={detailsUrl} class="title-link">
+      <h3 class="title">{title}</h3>
+    </a>
+    
     <p class="description">{description}</p>
     
     <div class="actions">
@@ -70,14 +70,14 @@ const detailsUrl = `/sites/${site.slug}/`;
 
   .title-link {
     text-decoration: none;
+    display: block;
   }
 
   .title {
-    margin: 0;
+    margin: 0 0 0.25rem 0;
     font-size: 1.5rem;
     color: #fff;
     line-height: 1.2;
-    margin-bottom: 0.75rem;
     transition: color 0.2s;
   }
 
@@ -85,12 +85,16 @@ const detailsUrl = `/sites/${site.slug}/`;
     color: var(--accent);
   }
 
-  .status-wrapper { margin-bottom: 1rem; }
+  .status-wrapper { 
+    margin-bottom: 1rem; 
+    display: flex;
+  }
 
   .description {
     color: var(--text-muted);
     font-size: 0.95rem;
     line-height: 1.5;
+    margin-top: 0;
     margin-bottom: 1.5rem;
     flex-grow: 1;
   }
