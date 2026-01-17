@@ -3,13 +3,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CardProject from '../components/CardProject.astro';
 import CardSite from '../components/CardSite.astro';
 import { getCollection } from 'astro:content';
+// 1. IMPORT THE ICON COMPONENT
+import { Icon } from 'astro-icon/components';
 
-// 1. Fetch all collections
+// 2. Fetch all collections
 const projects = await getCollection('projects');
 const sites = await getCollection('sites');
 const posts = await getCollection('blog');
 
-// 2. Sort Projects & Sites
+// 3. Sort Projects & Sites
 const sortOrder = { 
   'Production': 1, 
   'Active Development': 2, 
@@ -24,7 +26,7 @@ const sortOrder = {
 const sortedProjects = projects.sort((a, b) => (sortOrder[a.data.status] || 99) - (sortOrder[b.data.status] || 99));
 const sortedSites = sites.sort((a, b) => (sortOrder[a.data.status] || 99) - (sortOrder[b.data.status] || 99));
 
-// 3. Sort Blog Posts (Newest First) and limit to 5
+// 4. Sort Blog Posts (Newest First) and limit to 5
 const recentPosts = posts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5);
@@ -41,12 +43,26 @@ const recentPosts = posts
       • I own the execution from 0 to 1, leveraging AI to assist in solving problems and bringing my raw ideas to life.
     </p>
      <p class="bio">Feel free to reach out.</p>
+    
     <div class="links">
-      <a href="/Conway_Resume.pdf" class="link-item">📄 Résumé</a>
-      <a href="mailto:brian@conway.im" class="link-item">✉️ brian@conway.im</a>
-      <a href="https://github.com/thebronway" target="_blank" class="link-item">🐙 GitHub</a>
-      <a href="https://hub.docker.com/u/thebronway" target="_blank" class="link-item">🐳 Dockerhub</a>
+      <a href="/Conway_Resume.pdf" class="link-item">
+        <Icon name="tabler:file-text" class="icon" />
+        Résumé
+      </a>
+      <a href="mailto:brian@conway.im" class="link-item">
+        <Icon name="tabler:mail" class="icon" />
+        brian@conway.im
+      </a>
+      <a href="https://github.com/thebronway" target="_blank" class="link-item">
+        <Icon name="simple-icons:github" class="icon" />
+        GitHub
+      </a>
+      <a href="https://hub.docker.com/u/thebronway" target="_blank" class="link-item">
+        <Icon name="simple-icons:docker" class="icon" />
+        Dockerhub
+      </a>
     </div>
+
   </section>
 
   <hr class="divider" />
@@ -94,9 +110,35 @@ const recentPosts = posts
   .about-section { margin-bottom: 3rem; margin-top: 1rem; }
   h1 { font-size: 3rem; margin-bottom: 1.5rem; color: #fff; line-height: 1; }
   .bio { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6; max-width: none; }
+  
+  /* UPDATED LINK STYLES FOR ICONS */
   .links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .link-item { color: #fff; font-weight: 600; border-bottom: 1px solid transparent; font-size: 1.1rem; }
+  
+  .link-item { 
+    display: flex;       /* Use flex to align icon and text */
+    align-items: center; /* Vertically center them */
+    gap: 0.5rem;         /* Space between icon and text */
+    color: #fff; 
+    font-weight: 600; 
+    border-bottom: 1px solid transparent; 
+    font-size: 1.1rem; 
+    text-decoration: none; /* Remove default underline */
+  }
+  
   .link-item:hover { border-bottom-color: var(--accent); }
+
+  /* Icon Specific Styling */
+  .icon {
+    width: 1.3rem; 
+    height: 1.3rem;
+    color: var(--text-muted); /* Start with muted color */
+    transition: color 0.2s ease;
+  }
+
+  /* When hovering the link, light up the icon too */
+  .link-item:hover .icon {
+    color: #fff;
+  }
 
   /* Dividers */
   .divider { margin: 4rem 0; border: 0; border-top: 1px solid var(--border); }
@@ -119,7 +161,6 @@ const recentPosts = posts
   .post-list { list-style: none; padding: 0; }
   .post-list li { margin-bottom: 0.75rem; }
   
-  /* STYLED TO MATCH BLOG PAGE BAR */
   .post-link { 
     display: flex; 
     justify-content: space-between; 

@@ -48,6 +48,9 @@ I designed this domain and certificate manager because I had so many different s
     * Favicon
     * Add License
     * Add Live Demo to README
+    * Batch operations need confirmation
+    * Time zone bug
+    * Filter and sort on main dashboard
 
 ### Upcoming Version: v0.7
 * **Focus:** Bug Fixes and Improvements
@@ -58,6 +61,7 @@ I designed this domain and certificate manager because I had so many different s
 ### Upcoming Version: v0.8
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
+    * API key for either sending or receiving information
     * Refinements and Testing
     * Unriad CA Template
     * Code hardening
