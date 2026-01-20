@@ -42,9 +42,9 @@ I designed this calendar to be self-hosted and easily shared with friends and fa
     * Refinements and Testing
     * UI Updates (color updates, clear filters)
     * Search?
+    * favicon
     * Code hardening
     * Remove some screenshots from README, use summary
-    * favicon
 
 ### Upcoming Version: v0.9
 * **Focus:** Bug Fixes and Improvements
