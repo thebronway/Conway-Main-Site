@@ -49,7 +49,7 @@ I designed this domain and certificate manager because I had so many different s
     * Add License
     * Add Live Demo to README
     * Batch operations need confirmation
-    * Time zone bug
+    * Time zone bug, again
     * Filter and sort on main dashboard
 
 ### Upcoming Version: v0.7
@@ -61,17 +61,22 @@ I designed this domain and certificate manager because I had so many different s
 ### Upcoming Version: v0.8
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * API key for either sending or receiving information
+    * API key for either sending or receiving information?
     * Refinements and Testing
     * Unriad CA Template
     * Code hardening
 
-### Upcoming Version: v0.9 (optional; no set release timeline)
-* **Focus:** Bug Fixes
+### Upcoming Version: v0.9 (release canidate)
+* **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
     * Refinements and Testing
 
-### Upcoming Version: v1.0 (Production) (no set release timeline)
+### Upcoming Version: v1.0 (Production)
 * **Focus:** Final Touches
 * **Planned Changes:**
     * *No features or bug fixes are planned for this release.*
+
+### After v1.0 Production Release 
+* Version numbers will change to year.month.minor-version (ex 2027.1.1)
+* Releases will be monthly or every other month depending on certbot releases
+* This is so that certbot will always be up to date. 

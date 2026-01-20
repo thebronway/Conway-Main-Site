@@ -40,16 +40,25 @@ I designed this calendar to be self-hosted and easily shared with friends and fa
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
     * Refinements and Testing
+    * UI Updates (color updates, clear filters)
+    * Search?
+    * Code hardening
+    * Remove some screenshots from README, use summary
+    * favicon
+
+### Upcoming Version: v0.9
+* **Focus:** Bug Fixes and Improvements
+* **Planned Changes:**
+    * Refinements and Testing
     * Unriad CA Template
     * Code hardening
-    * Remove some screenshots from README
 
-### Upcoming Version: v0.9 (optional; no set release timeline)
-* **Focus:** Bug Fixes
+### Upcoming Version: v0.95 (release canidate)
+* **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
     * Refinements and Testing
 
-### Upcoming Version: v1.0 (Production) (no set release timeline)
+### Upcoming Version: v1.0 (Production)
 * **Focus:** Final Touches
 * **Planned Changes:**
     * *No features or bug fixes are planned for this release.*
