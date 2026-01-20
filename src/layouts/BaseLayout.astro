@@ -3,18 +3,17 @@ import Navbar from '../components/Navbar.astro';
 import SEOHead from '../components/SEOHead.astro';
 import Footer from '../components/Footer.astro';
 
-// Default props if none are provided
 const { 
   title, 
-  description = "Conway.im: The personal hub of Brian Conway. Active AI experiments, hosted services, and Docker projects.",
-  image
+  description = "brian.conway.im: The personal hub of Brian Conway. Active AI experiments, hosted services, and Docker projects.",
+  image,
+  showNavbar = true // New prop, defaults to true
 } = Astro.props;
 ---
 <html lang="en">
   <head>
     <SEOHead title={title} description={description} image={image} />
     
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ7P529952"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -28,11 +27,11 @@ const {
       /* THEME: Lighter Midnight Blue (Slate 900 Base) */
       :root {
         --bg-color: #0f172a;   
-        --card-bg: #1e293b;     
-        --border: #334155;      
-        --text-main: #f8fafc;   
+        --card-bg: #1e293b;      
+        --border: #334155;       
+        --text-main: #f8fafc;    
         --text-muted: #94a3b8; 
-        --accent: #38bdf8;      
+        --accent: #38bdf8;       
       }
 
       body { 
@@ -40,19 +39,17 @@ const {
         margin: 0; 
         background: var(--bg-color); 
         color: var(--text-main); 
-        /* REMOVED: The flex/min-height code that broke the layout */
       }
       a { color: inherit; text-decoration: none; }
-      
+       
       main { 
         max-width: 1000px; 
         margin: 0 auto; 
         padding: 2rem; 
-        /* REMOVED: The flex/width code that broke alignment */
       }
-      
+       
       h1, h2, h3 { font-weight: 700; letter-spacing: -0.01em; }
-      
+       
       /* Global Button Styles */
       .btn {
         display: inline-flex;
@@ -65,7 +62,7 @@ const {
         border: 1px solid transparent;
       }
       .btn:hover { transform: translateY(-1px); }
-      
+       
       .btn-primary { 
         background: #fff; 
         color: #0f172a; 
@@ -82,7 +79,7 @@ const {
     </style>
   </head>
   <body>
-    <Navbar />
+    {showNavbar && <Navbar />}
     <main>
       <slot />
     </main>

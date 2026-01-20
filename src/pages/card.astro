@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const profileImage = "/images/card/headshot.webp";
+
+const title = "Brian Conway | Business Card";
+const description = "Portfolio site, resume, and contact info for Brian Conway.";
+
+const links = [
+  {
+    text: "Portfolio Website",
+    url: "/",
+    icon: "tabler:home",
+    subtext: "brian.conway.im"
+  },
+  {
+    text: "LinkedIn",
+    url: "https://linkedin.com/in/briankconway", 
+    icon: "simple-icons:linkedin",
+  },
+  {
+    text: "Résumé",
+    url: "/files/Conway_Resume.pdf",
+    icon: "tabler:file-text",
+  },
+  {
+    text: "Email",
+    url: "mailto:brian@conway.im",
+    icon: "tabler:mail",
+    subtext: "brian@conway.im"
+  },
+  {
+    text: "GitHub",
+    url: "https://github.com/thebronway",
+    icon: "simple-icons:github",
+    subtext: "@thebronway"
+  },
+  {
+    text: "DockerHub",
+    url: "https://hub.docker.com/u/thebronway",
+    icon: "simple-icons:docker",
+    subtext: "@thebronway"
+  }
+];
+---
+
+<BaseLayout title={title} description={description} showNavbar={false}>
+  <div class="glow-bg"></div>
+
+  <section class="card-container">
+    <div class="header">
+      <div class="image-wrapper">
+        <img src={profileImage} alt="Brian Conway" class="profile-image" />
+      </div>
+      <h1>Brian Conway</h1>
+      <p class="subtitle">Business Card</p>
+    </div>
+
+    <div class="link-list">
+      {links.map((link, index) => (
+        <a 
+          href={link.url} 
+          target={link.url.startsWith('http') || link.url.endsWith('.pdf') ? "_blank" : "_self"} 
+          rel="noopener noreferrer" 
+          class="link-card"
+          style={`animation-delay: ${index * 100}ms`} 
+        >
+          <div class="icon-box">
+            <Icon name={link.icon} class="icon" />
+          </div>
+          <div class="link-info">
+            <span class="link-text">{link.text}</span>
+            {link.subtext && <span class="link-subtext">{link.subtext}</span>}
+          </div>
+          <Icon name="tabler:arrow-right" class="arrow" />
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* 1. Ambient Background Glow */
+  .glow-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .card-container {
+    max-width: 500px; /* Slightly narrower for a tighter mobile feel */
+    margin: 0 auto;
+    padding-top: 2rem;
+  }
+
+  /* 2. Entrance Animation Keyframes */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.8s ease-out forwards;
+  }
+
+  .image-wrapper {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    /* Subtle shadow to lift the image off the page */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-weight: 800; /* Bolder text */
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    color: var(--accent); /* Pop of color */
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+  }
+
+  .link-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* 3. Glassmorphism Card Style */
+  .link-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    
+    /* Semi-transparent background */
+    background: rgba(30, 41, 59, 0.6); 
+    backdrop-filter: blur(12px); /* Blur effect behind card */
+    
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px; /* Rounder corners */
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Animation Setup */
+    opacity: 0; 
+    animation: fadeUp 0.5s ease-out forwards;
+  }
+
+  /* Hover Effects */
+  .link-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    background: rgba(30, 41, 59, 0.9);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5); /* Deep shadow on hover */
+  }
+
+  .icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    margin-right: 1rem;
+    color: var(--text-main);
+    transition: background 0.2s;
+  }
+  
+  .link-card:hover .icon-box {
+    background: rgba(56, 189, 248, 0.1); /* Subtle blue tint on hover */
+    color: var(--accent);
+  }
+
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .link-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .link-text {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .link-subtext {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.1rem;
+    font-family: monospace; /* Tech feel for the subtext */
+    opacity: 0.8;
+  }
+
+  .arrow {
+    color: var(--text-muted);
+    width: 1.2rem;
+    height: 1.2rem;
+    transition: transform 0.2s, color 0.2s;
+    opacity: 0.5;
+  }
+
+  .link-card:hover .arrow {
+    color: #fff;
+    transform: translateX(4px);
+    opacity: 1;
+  }
+</style>

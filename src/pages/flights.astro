@@ -1,0 +1,370 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const title = "My Flight Videos";
+const description = "Library of my flight videos.";
+
+const flightData = [
+  {
+    filename: "2025-01-13 (KANP - KMTN - W29 - KANP) Timelaspe.mov",
+    url: "https://drive.google.com/file/d/1FywnHAvD8pRk2JvrKSAYcKXBWjCb6_S9/view?usp=drive_link", 
+    flightTime: "0.5 hrs",  // Total time in air
+    videoLength: "0:03:44"  // Length of the video file
+  },
+  {
+    filename: "2025-01-13 (KANP - KMTN - W29 - KANP).mov",
+    url: "https://drive.google.com/file/d/111uMvbxeTNWrF6AkZ_UcyZN29ZIWPbhr/view?usp=drive_link", 
+    flightTime: "1.5 hrs",
+    videoLength: "1:14:50"
+  }
+];
+
+const flights = flightData.map(flight => {
+  const dateMatch = flight.filename.match(/^(\d{4}-\d{2}-\d{2})/);
+  const rawDate = dateMatch ? dateMatch[1] : "Unknown Date";
+  
+  const dateObj = new Date(rawDate);
+  const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+  const routeMatch = flight.filename.match(/\((.*?)\)/);
+  const rawRoute = routeMatch ? routeMatch[1] : "Local Flight";
+  const airports = rawRoute.split('-').map(s => s.trim());
+
+  const isTimelapse = flight.filename.toLowerCase().includes("timelaspe") || flight.filename.toLowerCase().includes("timelapse");
+
+  return {
+    ...flight,
+    rawDate,
+    formattedDate,
+    airports,
+    isTimelapse,
+    type: isTimelapse ? "Timelapse" : "Full Flight"
+  };
+}).sort((a, b) => new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime());
+---
+
+<BaseLayout title={title} description={description} showNavbar={false}>
+  <section class="flight-container">
+    
+    <div class="header">
+      <h1>My Flight Videos</h1>
+      <p class="subtitle">Pilot: Brian Conway</p>
+    </div>
+
+    <div class="controls">
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="timelapse">Timelapse</button>
+        <button class="filter-btn" data-filter="full">Full Flight</button>
+      </div>
+      
+      <select id="sortSelect" class="sort-select">
+        <option value="newest">Date: Newest</option>
+        <option value="oldest">Date: Oldest</option>
+      </select>
+    </div>
+
+    <div class="grid" id="flightGrid">
+      {flights.map(flight => (
+        <a 
+          href={flight.url} 
+          target="_blank" 
+          class="flight-card" 
+          data-type={flight.isTimelapse ? "timelapse" : "full"} 
+          data-date={flight.rawDate}
+        >
+          
+          <div class="card-header">
+            <span class="date-badge">
+              <Icon name="tabler:calendar" class="badge-icon" />
+              {flight.formattedDate}
+            </span>
+            {flight.isTimelapse ? (
+              <span class="type-badge timelapse">Timelapse</span>
+            ) : (
+              <span class="type-badge full">Full Flight</span>
+            )}
+          </div>
+
+          <div class="route-section">
+            <h4 class="route-label">Route:</h4>
+            <div class="route-display">
+              {flight.airports.map((airport, index) => (
+                <div class="route-segment">
+                  <span class="airport-code">{airport}</span>
+                  {index < flight.airports.length - 1 && (
+                    <Icon name="tabler:arrow-narrow-right" class="route-arrow" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="flight-stats">
+             <span>Flight Time: <strong>{flight.flightTime}</strong></span>
+          </div>
+
+          <div class="card-footer">
+            <div class="meta-item">
+              <Icon name="tabler:player-play" class="meta-icon" />
+              <span>{flight.videoLength}</span>
+            </div>
+            
+            <div class="btn btn-white watch-btn">
+              Watch <Icon name="tabler:external-link" class="btn-icon" />
+            </div>
+          </div>
+
+        </a>
+      ))}
+    </div>
+
+  </section>
+</BaseLayout>
+
+<script>
+  // CLIENT-SIDE FILTERING & SORTING
+  const grid = document.getElementById('flightGrid');
+  // Need to cast to HTMLElement because they are now anchor tags
+  const cards = Array.from(document.querySelectorAll('.flight-card')) as HTMLElement[];
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const sortSelect = document.getElementById('sortSelect');
+
+  // 1. Filtering
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterType = btn.getAttribute('data-filter');
+
+      cards.forEach(card => {
+        const cardType = card.getAttribute('data-type');
+        if (filterType === 'all' || filterType === cardType) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 2. Sorting
+  sortSelect.addEventListener('change', (e) => {
+    const sortValue = (e.target as HTMLSelectElement).value;
+    const sortedCards = cards.sort((a, b) => {
+      const dateA = new Date(a.getAttribute('data-date') || '').getTime();
+      const dateB = new Date(b.getAttribute('data-date') || '').getTime();
+      return sortValue === 'newest' ? dateB - dateA : dateA - dateB;
+    });
+
+    sortedCards.forEach(card => grid?.appendChild(card));
+  });
+</script>
+
+<style>
+  .flight-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* REDUCED: Was 3rem */
+    padding-top: 1rem; 
+    padding-bottom: 4rem; 
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* REDUCED: Was 3rem */
+    margin-bottom: 2rem; 
+    text-align: center;
+  }
+
+  h1 { font-size: 2.5rem; margin: 0 0 0.5rem 0; color: #fff; }
+  .subtitle { color: var(--text-muted); font-size: 1.1rem; }
+
+  /* CONTROLS UNCHANGED */
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .filter-group {
+    display: flex;
+    background: var(--card-bg);
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .filter-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { color: #fff; }
+  .filter-btn.active { background: var(--accent); color: #0f172a; }
+  .sort-select {
+    background: var(--card-bg);
+    color: #fff;
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  /* GRID UPDATES */
+  .grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 1.5rem;
+    /* IMPORTANT: prevents cards from stretching vertically */
+    align-items: start; 
+  }
+
+  /* CARD UPDATES */
+  .flight-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* REMOVED height: 100% and min-height so it shrinks to fit content */
+    transition: transform 0.2s, border-color 0.2s;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .flight-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+
+  .flight-card:hover .watch-btn {
+    background: #e2e8f0;
+    border-color: #e2e8f0;
+    color: #0f172a;
+  }
+
+  /* HEADER: ROW LAYOUT */
+  .card-header {
+    display: flex;
+    justify-content: space-between; /* Pushes items to edges */
+    align-items: center;
+  }
+
+  .date-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .type-badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .type-badge.timelapse { background: rgba(16, 185, 129, 0.1); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.2); }
+  .type-badge.full { background: rgba(56, 189, 248, 0.1); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.2); }
+  
+  .badge-icon { width: 16px; height: 16px; }
+
+  /* ROUTE SECTION */
+  .route-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .route-label {
+    margin: 0;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: inline-block;
+    align-self: flex-start;
+    padding-bottom: 2px;
+  }
+
+  .route-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .route-segment {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .airport-code {
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 1rem;
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .route-arrow {
+    color: var(--text-muted);
+    width: 0.9rem;
+    height: 0.9rem;
+    opacity: 0.6;
+  }
+
+  /* STATS & FOOTER */
+  .flight-stats {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 0.25rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .meta-icon { width: 1rem; height: 1rem; }
+
+  .watch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem; /* Smaller button */
+    font-size: 0.85rem;
+    pointer-events: none; 
+  }
+  .btn-icon { width: 0.9rem; height: 0.9rem; }
+</style>
