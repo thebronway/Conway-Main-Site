@@ -6,6 +6,7 @@ const title = "TheBronway | Socials";
 const description = "Connect with Brian Conway on social media.";
 const profileImage = "/images/card/social-headshot.webp";
 const bannerImage = "/images/card/social-banner.webp";
+const cardImage = "/images/card/socialcard-preview.jpg";
 
 // Define links with their official Brand Colors
 const links = [
@@ -260,7 +261,7 @@ const links = [
     background: rgba(255,255,255,0.05);
     border-radius: 12px;
     margin-right: 1rem;
-    color: #fff;
+    color: var(--brand-color);
     transition: all 0.3s ease;
   }
 
@@ -271,6 +272,10 @@ const links = [
 
   .link-card:hover[style*="#000000"] .icon-box { 
      color: #ffffff !important; 
+  }
+
+  .link-card[style*="#000000"] .icon-box {
+    color: #ffffff;
   }
 
   .icon {

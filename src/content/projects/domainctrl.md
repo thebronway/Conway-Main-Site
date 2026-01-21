@@ -51,6 +51,7 @@ I designed this domain and certificate manager because I had so many different s
     * Batch operations need confirmation
     * Time zone bug, again
     * Filter and sort on main dashboard
+    * Share Sheet (1200x630)
 
 ### Upcoming Version: v0.7
 * **Focus:** Bug Fixes and Improvements

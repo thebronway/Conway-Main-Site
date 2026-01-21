@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
 
 const profileImage = "/images/card/headshot.webp";
+const cardImage = "/images/card/card-preview.jpg";
 
 const title = "Brian Conway | Business Card";
 const description = "Portfolio site, resume, and contact info for Brian Conway.";
@@ -12,7 +13,7 @@ const links = [
     text: "Portfolio Website",
     url: "/",
     icon: "tabler:home",
-    subtext: "brian.conway.im"
+    subtext: "https://brian.conway.im"
   },
   {
     text: "LinkedIn",
@@ -34,13 +35,11 @@ const links = [
     text: "GitHub",
     url: "https://github.com/thebronway",
     icon: "simple-icons:github",
-    subtext: "@thebronway"
   },
   {
     text: "DockerHub",
     url: "https://hub.docker.com/u/thebronway",
     icon: "simple-icons:docker",
-    subtext: "@thebronway"
   }
 ];
 ---
@@ -61,7 +60,7 @@ const links = [
       {links.map((link, index) => (
         <a 
           href={link.url} 
-          target={link.url.startsWith('http') || link.url.endsWith('.pdf') ? "_blank" : "_self"} 
+          target="_blank" 
           rel="noopener noreferrer" 
           class="link-card"
           style={`animation-delay: ${index * 100}ms`} 

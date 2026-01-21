@@ -32,7 +32,14 @@ A privacy-focused tool designed to analyze your Instagram connections. It allows
 
 ### Current Version: v0.2 (Production)
 
-### Upcoming Version: v0.3 (Production) (no set release timeline)
+### Upcoming Version: v0.3 (Production)
+* **Focus:** Minor updates and maintenance.
+* **Planned Changes:**
+    * Share Sheet (1200x630)
+    * Favicon
+    * Wiki
+
+### Upcoming Version: v0.4 (Production) (no set release timeline)
 * **Focus:** Minor updates and maintenance.
 * **Planned Changes:**
     * *No features or bug fixes are planned for this release.*
