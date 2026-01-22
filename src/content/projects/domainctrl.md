@@ -31,38 +31,46 @@ I designed this domain and certificate manager because I had so many different s
 1.  **SSL Lifecycle:** This app manages the full lifecycle of certificates. It can only renew certs it created. Existing certs should be replaced by ones generated here for auto-renewal.
 2.  **Authentication:** **This app has no built authentication.** If you choose to expose this to the internet, it is strongly, strongly, super strongly recommended to protect your instance using a reverse proxy and authentication service (e.g., Nginx and Authentik).
 
-## Screenshot
+## Screenshots
 
-<img src="/images/content/domainctrl-0.5-dashboard.png" alt="Calendar Screenshot" width="800" alt="Calendar Screenshot">
+<details><summary><b>Desktop</b></summary>
+
+<br>
+<img src="https://raw.githubusercontent.com/thebronway/domainCtrl/refs/heads/main/screenshots/desktop-dashboard-0.6.png" width="800" alt="Desktop Screenshot">
+<br>
+<br>
+<img src="https://raw.githubusercontent.com/thebronway/domainCtrl/refs/heads/main/screenshots/desktop-settings-0.6.png" width="800" alt="Desktop Screenshot">
+
+</details>
+<br>
+<details><summary><b>Mobile</b></summary>
+
+<br>
+
+<img src="https://raw.githubusercontent.com/thebronway/domainCtrl/refs/heads/main/screenshots/mobile-dashboard-0.6.png" width="300" alt="Mobile Screenshot">
+<br>
+<br>
+<img src="https://raw.githubusercontent.com/thebronway/domainCtrl/refs/heads/main/screenshots/mobile-settings-0.6.png" width="300" alt="Mobile Screenshot">
+
+</details>
 
 ## Development Roadmap
 
 > **Note:** This app will be rebuilt and updated regularly, in order to keep certbot updated.
 
-### Current Version: v0.5
-
-### Upcoming Version: v0.6
-* **Focus:** Bug Fixes and Improvements
-* **Planned Changes:**
-    * Refinements and Testing
-    * Favicon
-    * Add License
-    * Add Live Demo to README
-    * Batch operations need confirmation
-    * Time zone bug, again
-    * Filter and sort on main dashboard
-    * Share Sheet (1200x630)
+### Current Version: v0.65
 
 ### Upcoming Version: v0.7
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * Adding other DNS proivders (Cloudflare, DuckDNS, Azure DNS, Google Cloud DNS are planned)
+    * Refinements and Testing
+    * Adding other DNS proivders (None, Cloudflare, DuckDNS, Azure DNS, Google Cloud DNS are planned)
     * Code cleanup
 
 ### Upcoming Version: v0.8
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * API key for either sending or receiving information?
+    * API key for either sending / receiving
     * Refinements and Testing
     * Unriad CA Template
     * Code hardening
