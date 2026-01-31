@@ -1,7 +1,7 @@
 ---
 title: "StampAtlas"
 description: "A Self-Hosted Passport Travel App"
-status: "Concept"
+status: "Concept Phase"
 heroImage: "/images/thumbnails/StampAtlas-card.png"
 ---
 # A Self-Hosted Passport Travel App

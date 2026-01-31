@@ -1,7 +1,7 @@
 ---
 title: "FollowersCompare"
 description: "A Privacy Focused App to Analyze Instagram Followers"
-status: "Production"
+status: "Live"
 url: "https://followercompare.conway.im"
 heroImage: "/images/thumbnails/FollowersCompare-card.png"
 ---

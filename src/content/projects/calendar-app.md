@@ -41,9 +41,8 @@ I designed this calendar to be self-hosted and easily shared with friends and fa
 * **Planned Changes:**
     * Refinements and Testing
     * UI Updates (color updates, clear filters)
-    * Search?
+    * Search
     * favicon
-    * Code hardening
     * Remove some screenshots from README, use summary
     * Share Sheet (1200x630)
 

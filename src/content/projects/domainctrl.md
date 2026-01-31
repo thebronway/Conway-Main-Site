@@ -64,28 +64,52 @@ I designed this domain and certificate manager because I had so many different s
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
     * Refinements and Testing
-    * Adding other DNS proivders (None, Cloudflare, DuckDNS, Azure DNS, Google Cloud DNS are planned)
+        * up down reset on filter
+        * reset button only for filtered domains
+        * light mode tweaks (buttons, log,)
+    * Adding other DNS proivders (current ones in testing)
+        * None
+        * Cloudflare
+        * Azure DNS
+        * Google Cloud DNS
+    * One instance multiple providers
     * Code cleanup
+        * If delete domain, confirm, and delete certs/data/states
+
+### Upcoming Version: v0.75
+* **Focus:** Bug Fixes and Improvements
+* **Planned Changes:**
+    * Refinements and Testing
+        * API key for sending / receiving
+            * Add local remote
+        * Log Plain Text
 
 ### Upcoming Version: v0.8
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * API key for either sending / receiving
     * Refinements and Testing
-    * Unriad CA Template
+
+### Upcoming Version: v0.85
+* **Focus:** Bug Fixes and Improvements
+* **Planned Changes:**
+    * Wiki!
+    * Report a Bug
+    * Code Cleanup
+        * CSS Organization
     * Code hardening
 
 ### Upcoming Version: v0.9 (release canidate)
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * Refinements and Testing
+    * Code Cleanup
+    * Unriad CA Template
 
 ### Upcoming Version: v1.0 (Production)
 * **Focus:** Final Touches
 * **Planned Changes:**
     * *No features or bug fixes are planned for this release.*
 
-### After v1.0 Production Release 
+### After v1.X Production Release 
 * Version numbers will change to year.month.minor-version (ex 2027.1.1)
 * Releases will be monthly or every other month depending on certbot releases
-* This is so that certbot will always be up to date. 
+    * This is so that certbot will always be up to date. 

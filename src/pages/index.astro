@@ -13,12 +13,14 @@ const posts = await getCollection('blog');
 // Sort Projects & Sites by status
 const sortOrder = { 
   'Production': 1, 
-  'Active Development': 2, 
-  'Planning': 3, 
-  'Concept': 4, 
-  'Paused': 5,
-  'Archived': 6, 
-  'Cancelled': 7
+  'Live': 2,
+  'Active Development': 3, 
+  'Prototype': 4,
+  'Planning': 5, 
+  'Concept Phase': 6, 
+  'Paused': 7,
+  'Archived': 8, 
+  'Cancelled': 9
 };
 
 const sortedProjects = projects.sort((a, b) => (sortOrder[a.data.status] || 99) - (sortOrder[b.data.status] || 99));
