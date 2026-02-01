@@ -3,15 +3,13 @@ title: "Calendar App"
 description: "A Simple Self-Hosted Calendar App"
 status: "Active Development"
 demoUrl: "https://calendar-demo.conway.im"
+dockerUrl: "https://hub.docker.com/r/thebronway/calendar-app"
+gitUrl: "https://github.com/thebronway/calendar-app"
 heroImage: "/images/thumbnails/CalendarApp-card.png"
 ---
 # A Simple Self-Hosted Calendar App
 
 > **Note:** This app is nearing its full production release.
-
-**Links:**
-* [GitHub Repository](https://github.com/thebronway/calendar-app)
-* [DockerHub Image](https://hub.docker.com/r/thebronway/calendar-app)
 
 ## Purpose
 I designed this calendar to be self-hosted and easily shared with friends and family. The goal is to keep everyone informed about my travel plans and availability so they can plan accordingly.

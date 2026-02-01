@@ -20,7 +20,9 @@ const projectsCollection = defineCollection({
     status: statusEnum,
     heroImage: z.string().optional(),
     demoUrl: z.string().url().optional(),
-    repoUrl: z.string().url().optional(),
+    gitUrl: z.string().url().optional(),
+    dockerUrl: z.string().url().optional(),
+    url: z.string().url().optional(),
     order: z.number().default(0),
   }),
 });

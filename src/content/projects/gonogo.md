@@ -2,6 +2,7 @@
 title: "GoNoGo"
 description: "A Preflight App for Pilots to Decode Weather, Airspace and NOTAMs"
 status: "Active Development"
+url: "https://gonogoai.conway.im"
 heroImage: "/images/thumbnails/GoNoGo-AI-card.png"
 ---
 # A Preflight App for Pilots to Decode Weather, Airspace and NOTAMs

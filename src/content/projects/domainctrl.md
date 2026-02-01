@@ -3,6 +3,8 @@ title: "domainCtrl"
 description: "A Self-Hosted, Automated DDNS & SSL Certificate Manager"
 status: "Active Development"
 demoUrl: "https://domainctrl-demo.conway.im"
+gitUrl: "https://github.com/thebronway/domainCtrl"
+dockerUrl: "https://hub.docker.com/r/thebronway/domainCtrl"
 heroImage: "/images/thumbnails/domainCtrl-card.png"
 ---
 # A Self-Hosted, Automated DDNS & SSL Certificate Manager. 
