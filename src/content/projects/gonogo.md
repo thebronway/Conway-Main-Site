@@ -34,7 +34,7 @@ My main goal was to dive into AI engineering and learn how to interact with LLMs
 * **API Costs:** The app includes a custom rate limiter (5 requests / 30 minutes) to keep OpenAI costs manageable while in Active Development.
   * The rate limit will be normalized to 5 requests / 5 minutes in the future. 
 
-### Current Version: v0.5
+### Current Version: v0.55
 
 ### Upcoming Version: v0.6
 * **Focus:** Bug Fixes and Improvements
