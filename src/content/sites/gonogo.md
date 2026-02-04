@@ -1,8 +1,9 @@
 ---
 title: "GoNoGo"
-status: "Active Development"
+status: "Live"
 description: "A Preflight App for Pilots to Decode Weather, Airspace and NOTAMs"
 url: "https://gonogoai.conway.im"
+gitUrl: "https://github.com/thebronway/gonogo"
 heroImage: "/images/thumbnails/GoNoGo-AI-card.png"
 ---
 # A Preflight App for Pilots to Decode Weather, Airspace and NOTAMs.
@@ -33,7 +34,7 @@ My main goal was to dive into AI engineering and learn how to interact with LLMs
 * **API Costs:** The app includes a custom rate limiter (5 requests / 30 minutes) to keep OpenAI costs manageable while in Active Development.
   * The rate limit will be normalized to 5 requests / 5 minutes in the future. 
 
-### Current Version: v0.55
+### Current Version: v0.58
 
 ### Upcoming Version: v0.6
 * **Focus:** Bug Fixes and Improvements

@@ -34,6 +34,7 @@ const sitesCollection = defineCollection({
     description: z.string(),
     status: statusEnum,
     heroImage: z.string().optional(),
+    gitUrl: z.string().url().optional(),
     url: z.string().url().optional(),
     order: z.number().default(0),
   }),

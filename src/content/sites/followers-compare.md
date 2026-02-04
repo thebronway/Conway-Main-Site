@@ -3,6 +3,7 @@ title: "FollowersCompare"
 description: "A Privacy Focused App to Analyze Instagram Followers"
 status: "Live"
 url: "https://followercompare.conway.im"
+gitUrl: "https://github.com/thebronway/followers-compare"
 heroImage: "/images/thumbnails/FollowersCompare-card.png"
 ---
 # A Privacy Focused App to Analyze Instagram Followers
