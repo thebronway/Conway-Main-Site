@@ -34,7 +34,20 @@ My main goal was to dive into AI engineering and learn how to interact with LLMs
 * **API Costs:** The app includes a custom rate limiter (5 requests / 30 minutes) to keep OpenAI costs manageable while in Active Development.
   * The rate limit will be normalized to 5 requests / 5 minutes in the future.
 
-### Current Version: v0.60
+### Current Version: v0.62
 
-### Upcoming Version: v0.61
+### Upcoming Version: v0.63
 * **Focus:** Bug Fixes and Improvements
+* **Planned Changes:**
+    * Rate Limit Client ID OR IP + ID fingerprint?
+
+### Upcoming Version: v0.70
+* **Focus:** Bug Fixes and Improvements
+* **Planned Changes:**
+    * Kisok Mode
+
+### Upcoming Version: v0.80
+* **Focus:** Bug Fixes and Improvements
+* **Planned Changes:**
+    * Dyamic TFR
+    * Airport DB
