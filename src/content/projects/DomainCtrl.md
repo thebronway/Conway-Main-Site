@@ -69,8 +69,8 @@ I designed this domain and certificate manager because I had so many different s
         * up down reset on filter
         * reset button only for filtered domains
         * light mode tweaks (buttons, log,)
-    * Adding other DNS proivders (current ones in testing)
-        * None
+    * Adding other DNS proivders (borken out into their own components)
+        * None (this is going to be a pretty big architectural shift, because I want the default to be a blank canvas in order to accommodate multiple instances of the same provider, and promote providers like if you have a remote instance of the app on one computer it could read from that with API keys, which I'll set up in the future)
         * Cloudflare
         * Azure DNS
         * Google Cloud DNS
@@ -94,8 +94,8 @@ I designed this domain and certificate manager because I had so many different s
 ### Upcoming Version: v0.85
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * Wiki!
-    * Report a Bug
+    * Wiki on git. 
+    * Report a Bug of git. 
     * Code Cleanup
         * CSS Organization
     * Code hardening

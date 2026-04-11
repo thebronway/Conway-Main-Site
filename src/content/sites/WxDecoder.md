@@ -26,28 +26,53 @@ My main goal was to dive into AI engineering and learn how to interact with LLMs
 * **Smart Caching:** Intelligent caching strategy that respects METAR update cycles (clears at :50 past the hour) to ensure quality data freshness.
 * **Smart NOTAMs:** Filters through hundreds of raw notices to identify and translate *critical* hazards (closures, lighting) into plain English.
 * **Airspace Alerts:** Checks your proximity to permanent restricted zones (DC SFRA, P-40, Disney, etc.).
-* **Vector Math:** Automatically calculates crosswind components and compares it to the available runways.
+* **Vector Math:** Automatically calculates crosswind components and compares it to the available runways via onboard logic.
 * **Contextual Reporting:** Integrated feedback tools allow pilots to flag hallucinations, automatically capturing the exact METAR/TAF snapshot for debugging.
+* **Kiosk Mode:** A 16:9 full-screen display optimized for TVs in flight schools and FBOs. It automatically polls for new weather data every minute and refreshes the analysis instantly without user interaction.
 
 ## Important Notes
 
 * **API Costs:** The app includes a custom rate limiter (5 requests / 30 minutes) to keep OpenAI costs manageable while in Active Development.
-  * The rate limit will be normalized to 5 requests / 5 minutes in the future.
+    * The rate limit will be normalized to 5 requests / 5 minutes in the future.
 
-### Current Version: v0.62
+### Current Version: v0.76
 
-### Upcoming Version: v0.63
+### Upcoming Version: v0.77
+* **Focus:** Bug Fixes and Improvements
+* **Planned Changes:** 
+    * Dynamic TFR & Permant Zones (along with optional custom error messages for each zone) table(s) in the DB. Need to create custom shapes for all permanent and dynamic and temp (VIP, Stadium), along with start and end times for temp ones.  So that it will alert users if a TRF is hot later that day. or ends soon. The script to update the TFRs should run hourly to look for new TFRs. Also need to add down alerts to admin settings page (can be same button as current faa api/openai api down button, just need to add the check)
+        * I want to keep the check Dynamic TFR disclaimer but make it softer, for liability. We need to update verbiage around the site.
+    - First no code. We need to discuss how this will work with the current way. Everything is set up and how complex it will be and how to maintain it and how it will work with the current searches. Switch DB to postgis? We're just gonna discuss and talk and go through options. Please ask questions if you do not understand or need more information.
+
+### Upcoming Version: v0.78
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * Rate Limit Client ID OR IP + ID fingerprint?
+    * Upgrade DB to postgis
+    * About / Disclaimer page updates to include new kiosk mode.
+    * FAA/Open API liveness probe retry before sending alert
+    * Kiosk Mode demo page, add two more, make image sizes the same, list differences (need new section above the screenshot)
+    * Admin page. Difference between CACHE_HIT_LINK and CACHE_HIT?  and can we get rid of the underscores.
+    * Crosswind tollerance should become a variable 
+    * 502 - change to maintenance and add auto refresh
 
-### Upcoming Version: v0.70
+### Upcoming Version: v0.79
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * Kisok Mode
+    * KB
 
 ### Upcoming Version: v0.80
 * **Focus:** Bug Fixes and Improvements
 * **Planned Changes:**
-    * Dyamic TFR
-    * Airport DB
+    * PWA (Progressive Web App) Optimizations
+    * Airport DB - maintain my own?
+    * Rate Limit Client ID OR IP + ID fingerprint?
+
+### Upcoming Version: v0.85
+* **Focus:** Bug Fixes and Improvements
+* **Planned Changes:**
+    * Routes: takeoff airport weather/ time or power? / in route weather / landing airport weather
+
+### Upcoming Version: v0.90
+* **Focus:** Bug Fixes and Improvements
+* **Planned Changes:**
+    * Full SEO/AEO/Adsence optimization
