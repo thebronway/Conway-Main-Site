@@ -9,7 +9,11 @@ heroImage: "/images/thumbnails/domainCtrl-card.png"
 ---
 # A Self-Hosted, Automated DDNS & SSL Certificate Manager. 
 
-> **Note:** This app is nearing is in active development and should be used with caution.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-v0.6.5-blue.svg)
+![Docker](https://img.shields.io/docker/pulls/thebronway/domainctrl?logo=docker)
+
+> **Note:** This app is in active development and should be used with caution.
 
 > **Note:** Currently domainCtrl only supports AWS Route 53 (more providers coming soon).
 

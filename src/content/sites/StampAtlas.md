@@ -6,6 +6,8 @@ heroImage: "/images/thumbnails/StampAtlas-card.png"
 ---
 # A Social Passport Travel App
 
+![Version](https://img.shields.io/badge/version-v0.0.0-blue.svg)
+
 > **Note:** This site is its initial concept phase
 
 ## Purpose

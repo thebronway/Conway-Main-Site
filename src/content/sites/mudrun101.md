@@ -6,6 +6,8 @@ heroImage: "/images/thumbnails/mudrun101-card.png"
 ---
 # An OCR Mud Run Guide
 
+![Version](https://img.shields.io/badge/version-v0.0.0-blue.svg)
+
 > **Note:** Development on this site is currently paused. I'm evaluating the niche audience to determine the best path forward and analyzing the project's longterm viability.
 
 ## Purpose

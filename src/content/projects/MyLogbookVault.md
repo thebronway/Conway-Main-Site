@@ -6,6 +6,8 @@ heroImage: "/images/thumbnails/MyLogbookVault-card.png"
 ---
 # A Pilots Self-Hosted Digital Logbook Backup and Stats
 
+![Version](https://img.shields.io/badge/version-v0.0.0-blue.svg)
+
 > **Note:** This project is its initial concept phase 
 
 ## Purpose

@@ -8,6 +8,8 @@ heroImage: "/images/thumbnails/FollowersCompare-card.png"
 ---
 # A Privacy Focused App to Analyze Instagram Followers
 
+![Version](https://img.shields.io/badge/version-v0.2.0-blue.svg)
+
 ## Purpose
 A privacy-focused tool designed to analyze your Instagram connections. It allows you to compare your "Followers" vs. "Following" lists to identify who isn't following you back, while also tracking follower trends (gains and losses) over time using historical data.
 

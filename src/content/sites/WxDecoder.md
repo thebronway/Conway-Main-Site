@@ -8,6 +8,8 @@ heroImage: "/images/thumbnails/WxDecoder-card.png"
 ---
 # A Situational Awareness Tool for Pilots to Decode Weather & NOTAMs.
 
+![Version](https://img.shields.io/badge/version-v0.7.6-blue.svg)
+
 **WxDecoder** is a situational awareness support tool that aggregates real-time aviation data and uses OpenAI to generate plain-English condition reports. It deciphers raw METARs, TAFs, and NOTAMs based on your specific aircraft profile to help enhance your preflight situational awareness.
 
 > **Note:** AI normalizes data and can make errors. Always verify with official sources.
