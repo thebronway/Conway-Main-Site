@@ -1,0 +1,31 @@
+---
+title: "Calendar App"
+description: "A Simple Self-Hosted Calendar App"
+status: "Active Development"
+demoUrl: "https://calendar-demo.conway.im"
+dockerUrl: "https://hub.docker.com/r/thebronway/calendar-app"
+gitUrl: "https://github.com/thebronway/calendar-app"
+heroImage: "/images/thumbnails/CalendarApp-card.png"
+order: 1
+---
+import Tabs from '../../components/Tabs.astro';
+import TabItem from '../../components/TabItem.astro';
+import GitHubMarkdown from '../../components/GitHubMarkdown.astro';
+
+<Tabs>
+  <TabItem label="README">
+    <GitHubMarkdown owner="thebronway" repo="calendar-app" path="README.md" />
+  </TabItem>
+
+  <TabItem label="USER GUIDE">
+    <GitHubMarkdown owner="thebronway" repo="calendar-app" path="docs/USER_GUIDE.md" />
+  </TabItem>
+
+  <TabItem label="CHANGELOG">
+    <GitHubMarkdown owner="thebronway" repo="calendar-app" path="CHANGELOG.md" />
+  </TabItem>
+
+  <TabItem label="ROADMAP">
+    <GitHubMarkdown owner="thebronway" repo="calendar-app" path="ROADMAP.md" />
+  </TabItem>
+</Tabs>

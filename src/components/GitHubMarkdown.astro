@@ -1,0 +1,63 @@
+---
+const { owner, repo, path, branch = "main" } = Astro.props;
+
+// 1. Target the raw file on GitHub
+const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+let htmlContent = "";
+
+try {
+  const response = await fetch(rawUrl);
+  if (!response.ok) throw new Error(`Failed to fetch ${rawUrl}`);
+  const rawMarkdown = await response.text();
+
+  // 2. Use GitHub's official API to compile the Markdown into HTML
+  const apiResponse = await fetch("https://api.github.com/markdown", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "User-Agent": "Astro-Build" // GitHub API requires a User-Agent header
+    },
+    body: JSON.stringify({ text: rawMarkdown })
+  });
+
+  if (apiResponse.ok) {
+    htmlContent = await apiResponse.text();
+  } else {
+    htmlContent = `<p style="color: red;">Error rendering markdown from GitHub API.</p>`;
+  }
+} catch (error) {
+  console.error(error);
+  htmlContent = `<p style="color: red;">Could not load remote markdown file.</p>`;
+}
+---
+
+<div class="remote-markdown" set:html={htmlContent} />
+
+<style>
+  /* Optional: Style the injected GitHub content so it fits your Seaweed theme */
+  .remote-markdown :global(h1), 
+  .remote-markdown :global(h2), 
+  .remote-markdown :global(h3) {
+    color: var(--accent);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .remote-markdown :global(p) {
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .remote-markdown :global(code) {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .remote-markdown :global(pre) {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+</style>

@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "astro": "^4.0.0",
+    "@astrojs/mdx": "^3.0.0",
+    "@astrojs/sitemap": "3.6.0",
     "astro-icon": "latest",
     "@iconify-json/tabler": "latest",
     "@iconify-json/simple-icons": "latest"

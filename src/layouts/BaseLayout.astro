@@ -7,49 +7,60 @@ const {
   title, 
   description = "brian.conway.im: The personal hub of Brian Conway. Active projects, hosted sites, and blog posts.",
   image,
-  showNavbar = true // New prop, defaults to true
+  showNavbar = true,
+  noindex = false,
+  boxed = true,
+  showFooter = true
 } = Astro.props;
 ---
 <html lang="en">
   <head>
     <SEOHead title={title} description={description} image={image} />
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ7P529952"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-XQ7P529952');
-    </script>
 
     <style is:global>
-      /* THEME: Lighter Midnight Blue (Slate 900 Base) */
+      /* THEME: Tech Seaweed & Sunburst Gold */
       :root {
-        --bg-color: #0f172a;   
-        --card-bg: #1e293b;      
-        --border: #334155;       
-        --text-main: #f8fafc;    
-        --text-muted: #94a3b8; 
-        --accent: #38bdf8;       
+        --page-bg: #12332a;
+        --bg-color: #0f2422;      /* Deep Seaweed Background */
+        --card-bg: #173633;       /* Elevated Seaweed Card */
+        --border: #25524e;        
+        --text-main: #f0fdfa;    
+        --text-muted: #99c2bd;    
+        --accent: #eab308;        
       }
 
+      /* Global Reset & Body */
       body { 
-        font-family: system-ui, -apple-system, sans-serif; 
+        font-family: system-ui, -apple-system, sans-serif;
         margin: 0; 
-        background: var(--bg-color); 
+        background: var(--bg-color); /* Default background */
         color: var(--text-main); 
       }
+      
+      body.is-boxed {
+        background: var(--page-bg); /* Use the darker background outside the box */
+      }
+
       a { color: inherit; text-decoration: none; }
-       
+      h1, h2, h3 { font-weight: 700; letter-spacing: -0.01em; }
+
+      /* The Bounding Box */
+      .site-wrapper {
+        max-width: 1364px;       /* Expanded for larger 150px flanks on each side */
+        margin: 2rem auto;       /* Floats it off the top/bottom/sides */
+        background: var(--bg-color); 
+        border: 1px solid var(--border);
+        border-radius: 24px;       
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+      }
+
+      /* Your Original Main */
       main { 
-        max-width: 1000px; 
+        max-width: 1000px;
         margin: 0 auto; 
         padding: 2rem; 
       }
-       
-      h1, h2, h3 { font-weight: 700; letter-spacing: -0.01em; }
-       
+
       /* Global Button Styles */
       .btn {
         display: inline-flex;
@@ -62,7 +73,7 @@ const {
         border: 1px solid transparent;
       }
       .btn:hover { transform: translateY(-1px); }
-       
+      
       .btn-primary { 
         background: #fff; 
         color: #0f172a; 
@@ -75,14 +86,40 @@ const {
         border-color: var(--border); 
         margin-left: 0.5rem; 
       }
-      .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #475569; }
+      .btn-secondary:hover { 
+        background: rgba(255,255,255,0.1); 
+        border-color: var(--accent); 
+      }
+
+      /* Mobile Snap */
+      @media (max-width: 1400px) {
+        .site-wrapper {
+          max-width: 100%;
+          margin: 0;
+          border-radius: 0;
+          border: none;
+          box-shadow: none;
+        }
+      }
     </style>
   </head>
-  <body>
-    {showNavbar && <Navbar />}
-    <main>
-      <slot />
-    </main>
-    <Footer />
+  <body class={boxed ? "is-boxed" : ""}>
+    {boxed ? (
+      <div class="site-wrapper">
+        {showNavbar && <Navbar />}
+        <main>
+          <slot />
+        </main>
+        {showFooter && <Footer />}
+      </div>
+    ) : (
+      <>
+        {showNavbar && <Navbar />}
+        <main>
+          <slot />
+        </main>
+        {showFooter && <Footer />}
+      </>
+    )}
   </body>
 </html>

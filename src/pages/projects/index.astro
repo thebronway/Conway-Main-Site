@@ -18,7 +18,12 @@ const sortOrder = {
   'Cancelled': 9
 };
 
-const sortedProjects = projects.sort((a, b) => (sortOrder[a.data.status] || 99) - (sortOrder[b.data.status] || 99));
+const sortedProjects = projects.sort((a, b) => {
+  const statusA = sortOrder[a.data.status] || 99;
+  const statusB = sortOrder[b.data.status] || 99;
+  if (statusA !== statusB) return statusA - statusB;
+  return (a.data.order || 0) - (b.data.order || 0);
+});
 ---
 
 <BaseLayout title="All Projects">

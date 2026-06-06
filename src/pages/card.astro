@@ -44,7 +44,7 @@ const links = [
 ];
 ---
 
-<BaseLayout title={title} description={description} showNavbar={false}>
+<BaseLayout title={title} description={description} showNavbar={false} boxed={false} showFooter={false}>
   <div class="glow-bg"></div>
 
   <section class="card-container">
@@ -90,6 +90,8 @@ const links = [
     background: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent 70%);
     z-index: -1;
     pointer-events: none;
+    min-height: 100vh;             /* Ensures it stretches to at least the bottom of the screen */
+    background-attachment: fixed;  /* Locks the gradient to the camera, so scrolling never breaks it */
   }
 
   .card-container {

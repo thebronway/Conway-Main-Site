@@ -3,6 +3,7 @@ title: "StampAtlas"
 description: "A Social Passport Travel App"
 status: "Concept Phase"
 heroImage: "/images/thumbnails/StampAtlas-card.png"
+order: 1
 ---
 # A Social Passport Travel App
 
@@ -26,7 +27,3 @@ A mobile-first web application designed for tracking travel experiences through 
 * **The Discovery Hub:** A central marketplace/library to find featured, branded, or community-created passports.
 * **Comparison Dashboards:** Side-by-side "VS" views to compare progress bars and completeness with friends.
 * **Activity Feed:** A real-time log of friend activity (e.g., *John visited and stamped Grand Canyon National Park*) to encourage healthy competition.
-
-## Development Roadmap
-
-* **Focus:** The [**Self-Hosted Version**](https://conway.im/projects/stampatlas/) will be created first to establish core mechanics before expanding to this social, centralized platform.

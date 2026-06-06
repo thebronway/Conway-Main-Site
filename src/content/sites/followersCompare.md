@@ -5,6 +5,7 @@ status: "Live"
 url: "https://followercompare.conway.im"
 gitUrl: "https://github.com/thebronway/followers-compare"
 heroImage: "/images/thumbnails/FollowersCompare-card.png"
+order: 3
 ---
 # A Privacy Focused App to Analyze Instagram Followers
 

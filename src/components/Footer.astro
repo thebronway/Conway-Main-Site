@@ -7,10 +7,26 @@ const today = new Date();
     <p>
       &copy; {today.getFullYear()} Brian Conway. All rights reserved.
     </p>
-    </div>
+    <p class="support">
+      Find my projects helpful? <a href="https://buymeacoffee.com/brianconway" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
+    </p>
+  </div>
 </footer>
 
 <style>
+  .support {
+    margin-top: 0.5rem;
+  }
+  .support a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  .support a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
   footer {
     padding: 3rem 2rem;
     text-align: center;

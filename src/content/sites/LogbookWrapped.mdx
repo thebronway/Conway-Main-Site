@@ -1,0 +1,26 @@
+---
+title: "LogbookWrapped"
+status: "Live"
+description: "A privacy-first web app that transforms EFB logbook exports into shareable aviation stories"
+heroImage: "/images/thumbnails/LogbookWrapped-card.png"
+url: "https://logbookwrapped.conway.im"
+gitUrl: "https://github.com/thebronway/LogbookWrapped"
+order: 1
+---
+import Tabs from '../../components/Tabs.astro';
+import TabItem from '../../components/TabItem.astro';
+import GitHubMarkdown from '../../components/GitHubMarkdown.astro';
+
+<Tabs>
+  <TabItem label="README">
+    <GitHubMarkdown owner="thebronway" repo="LogbookWrapped" path="README.md" />
+  </TabItem>
+
+  <TabItem label="CHANGELOG">
+    <GitHubMarkdown owner="thebronway" repo="LogbookWrapped" path="CHANGELOG.md" />
+  </TabItem>
+
+  <TabItem label="ROADMAP">
+    <GitHubMarkdown owner="thebronway" repo="LogbookWrapped" path="ROADMAP.md" />
+  </TabItem>
+</Tabs>
