@@ -36,7 +36,11 @@
     transition: color 0.2s;
     white-space: nowrap;
   }
-  .links a:hover { color: var(--text-main); }
+  .links a:hover { color: var(--accent); } /* Pop to sunburst gold on hover */
+
+  /* Optional: Makes your main logo link flash gold on hover as well */
+  .logo a { transition: color 0.2s; }
+  .logo a:hover { color: var(--accent); }
 
   @media (max-width: 768px) {
     nav {
