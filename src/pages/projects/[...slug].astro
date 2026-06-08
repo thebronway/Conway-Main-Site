@@ -14,6 +14,30 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
+
+async function resolveVersion(gitUrl: string | undefined, versionField: string | undefined) {
+  if (!versionField) return null;
+  if (versionField !== 'fetch') return versionField;
+  if (!gitUrl) return null;
+
+  const match = gitUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
+  if (!match) return null;
+  const [, owner, repo] = match;
+
+  try {
+    const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`;
+    const response = await fetch(rawUrl);
+    if (!response.ok) return null;
+    const text = await response.text();
+    const versionMatch = text.match(/badge\/version-([v\d\.]+)-/i);
+    return versionMatch ? versionMatch[1] : null;
+  } catch (error) {
+    console.error(`Error fetching version for ${repo}:`, error);
+    return null;
+  }
+}
+
+const version = await resolveVersion(entry.data.gitUrl, entry.data.version);
 const { Content } = await entry.render();
 const visitUrl = entry.data.url;
 ---
@@ -33,6 +57,7 @@ const visitUrl = entry.data.url;
     <div class="hero-content">
       <div class="status-wrapper">
         <StatusBadge status={entry.data.status} />
+        {version && <span class="version-badge">{version}</span>}
       </div>
 
       <h1>{entry.data.title}</h1>
@@ -112,7 +137,22 @@ const visitUrl = entry.data.url;
 
   .status-wrapper {
     display: flex;
+    gap: 0.5rem;
     margin-bottom: 1rem; 
+  }
+
+  .version-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    white-space: nowrap;
   }
 
   h1 {

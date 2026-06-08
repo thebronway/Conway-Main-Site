@@ -4,6 +4,7 @@ description: "An OCR Mud Run Guide"
 status: "Paused"
 heroImage: "/images/thumbnails/mudrun101-card.png"
 order: 1
+version: "v0.0.0"
 ---
 # An OCR Mud Run Guide
 

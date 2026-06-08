@@ -4,7 +4,33 @@ import CardSite from '../../components/CardSite.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 
-const sites = await getCollection('sites');
+async function resolveVersion(gitUrl: string | undefined, versionField: string | undefined) {
+  if (!versionField) return null;
+  if (versionField !== 'fetch') return versionField;
+  if (!gitUrl) return null;
+
+  const match = gitUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
+  if (!match) return null;
+  const [, owner, repo] = match;
+
+  try {
+    const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`;
+    const response = await fetch(rawUrl);
+    if (!response.ok) return null;
+    const text = await response.text();
+    const versionMatch = text.match(/badge\/version-([v\d\.]+)-/i);
+    return versionMatch ? versionMatch[1] : null;
+  } catch (error) {
+    console.error(`Error fetching version for ${repo}:`, error);
+    return null;
+  }
+}
+
+const rawSites = await getCollection('sites');
+const sites = await Promise.all(rawSites.map(async (s) => ({
+  ...s,
+  data: { ...s.data, version: (await resolveVersion(s.data.gitUrl, s.data.version)) || undefined }
+})));
 
 const sortOrder = { 
   'Production': 1, 

@@ -1,7 +1,7 @@
 ---
 import StatusBadge from './StatusBadge.astro';
 const { site } = Astro.props;
-const { title, description, status, url, heroImage } = site.data;
+const { title, description, status, version, url, heroImage } = site.data;
 const detailsUrl = `/sites/${site.slug}/`;
 ---
 
@@ -14,6 +14,7 @@ const detailsUrl = `/sites/${site.slug}/`;
   <div class="content">
     <div class="status-wrapper">
       <StatusBadge status={status} />
+      {version && <span class="version-badge">{version}</span>}
     </div>
 
     <a href={detailsUrl} class="title-link">
@@ -88,6 +89,21 @@ const detailsUrl = `/sites/${site.slug}/`;
   .status-wrapper { 
     margin-bottom: 1rem; 
     display: flex;
+    gap: 0.5rem;
+  }
+
+  .version-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    white-space: nowrap;
   }
 
   .description {
