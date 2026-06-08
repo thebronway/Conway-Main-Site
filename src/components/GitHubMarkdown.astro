@@ -21,7 +21,34 @@ try {
   });
 
   if (apiResponse.ok) {
-    htmlContent = await apiResponse.text();
+    let rawHtml = await apiResponse.text();
+    const baseLinkUrl = `https://github.com/${owner}/${repo}/blob/${branch}/${path}`;
+    const baseSrcUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+
+    rawHtml = rawHtml.replace(/href="([^"]+)"/g, (match, link) => {
+      if (link.startsWith('#')) {
+        return match;
+      }
+      let absoluteUrl = link;
+      if (!/^(https?:|mailto:|tel:)/i.test(link)) {
+        try {
+          absoluteUrl = new URL(link, baseLinkUrl).href;
+        } catch {
+          return match;
+        }
+      }
+      return `href="${absoluteUrl}" target="_blank" rel="noopener noreferrer"`;
+    });
+
+    rawHtml = rawHtml.replace(/src="(?!(https?:|data:))([^"]+)"/g, (match, proto, src) => {
+      try {
+        return `src="${new URL(src, baseSrcUrl).href}"`;
+      } catch {
+        return match;
+      }
+    });
+
+    htmlContent = rawHtml;
   } else {
     htmlContent = `<p style="color: red;">Error rendering markdown from GitHub API.</p>`;
   }
@@ -58,5 +85,13 @@ try {
     padding: 1rem;
     border-radius: 8px;
     overflow-x: auto;
+  }
+  .remote-markdown :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    transition: opacity 0.2s;
+  }
+  .remote-markdown :global(a:hover) {
+    opacity: 0.8;
   }
 </style>
