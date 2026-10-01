@@ -9,7 +9,8 @@ const statusEnum = z.enum([
   'Concept Phase',
   'Paused',
   'Archived', 
-  'Cancelled'
+  'Cancelled',
+  'Hidden'
 ]);
 
 const projectsCollection = defineCollection({

@@ -1,7 +1,7 @@
 ---
 title: "mudrun101"
 description: "An OCR Mud Run Guide"
-status: "Paused"
+status: "Hidden"
 heroImage: "/images/thumbnails/mudrun101-card.png"
 order: 1
 version: "v0.0.0"

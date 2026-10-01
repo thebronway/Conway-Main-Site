@@ -1,9 +1,9 @@
 ---
 title: "MyLogbookVault"
 description: "A Pilots Self-Hosted Digital Logbook Backup and Stats"
-status: "Concept Phase"
+status: "Hidden"
 heroImage: "/images/thumbnails/MyLogbookVault-card.png"
-order: 3
+order: 4
 version: "v0.0.0"
 ---
 # A Pilots Self-Hosted Digital Logbook Backup and Stats

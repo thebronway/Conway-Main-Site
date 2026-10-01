@@ -54,19 +54,23 @@ const sortOrder = {
   'Cancelled': 9
 };
 
-const sortedProjects = projects.sort((a, b) => {
-  const statusA = sortOrder[a.data.status] || 99;
-  const statusB = sortOrder[b.data.status] || 99;
-  if (statusA !== statusB) return statusA - statusB;
-  return (a.data.order || 0) - (b.data.order || 0);
-});
-
-const sortedSites = sites.sort((a, b) => {
-  const statusA = sortOrder[a.data.status] || 99;
-  const statusB = sortOrder[b.data.status] || 99;
-  if (statusA !== statusB) return statusA - statusB;
-  return (a.data.order || 0) - (b.data.order || 0);
-});
+const sortedProjects = projects
+  .filter(p => p.data.status !== 'Hidden')
+  .sort((a, b) => {
+    const statusA = sortOrder[a.data.status] || 99;
+    const statusB = sortOrder[b.data.status] || 99;
+    if (statusA !== statusB) return statusA - statusB;
+    return (a.data.order || 0) - (b.data.order || 0);
+  });
+  
+const sortedSites = sites
+  .filter(s => s.data.status !== 'Hidden')
+  .sort((a, b) => {
+    const statusA = sortOrder[a.data.status] || 99;
+    const statusB = sortOrder[b.data.status] || 99;
+    if (statusA !== statusB) return statusA - statusB;
+    return (a.data.order || 0) - (b.data.order || 0);
+  });
 ---
 
 <BaseLayout title="brian.conway.im">
