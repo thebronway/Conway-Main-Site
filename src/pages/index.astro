@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CardProject from '../components/CardProject.astro';
-import CardSite from '../components/CardSite.astro';
 import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 
@@ -27,61 +26,44 @@ async function resolveVersion(gitUrl: string | undefined, versionField: string |
   }
 }
 
-// Fetch projects and sites
+// Fetch projects
 const rawProjects = await getCollection('projects');
-const rawSites = await getCollection('sites');
 
 const projects = await Promise.all(rawProjects.map(async (p) => ({
   ...p,
   data: { ...p.data, version: (await resolveVersion(p.data.gitUrl, p.data.version)) || undefined }
 })));
 
-const sites = await Promise.all(rawSites.map(async (s) => ({
-  ...s,
-  data: { ...s.data, version: (await resolveVersion(s.data.gitUrl, s.data.version)) || undefined }
-})));
-
-// Sort Projects & Sites by status
-const sortOrder = {
-  'Production': 1, 
-  'Live': 2,
-  'Active Development': 3, 
-  'Prototype': 4,
-  'Planning': 5, 
-  'Concept Phase': 6, 
-  'Paused': 7,
-  'Archived': 8, 
-  'Cancelled': 9
-};
-
-const sortedProjects = projects
+// Filter out hidden and sort by manual override order, then alphabetically by title
+const visibleProjects = projects
   .filter(p => p.data.status !== 'Hidden')
   .sort((a, b) => {
-    const statusA = sortOrder[a.data.status] || 99;
-    const statusB = sortOrder[b.data.status] || 99;
-    if (statusA !== statusB) return statusA - statusB;
-    return (a.data.order || 0) - (b.data.order || 0);
+    const orderDiff = (a.data.order || 0) - (b.data.order || 0);
+    if (orderDiff !== 0) return orderDiff;
+    // Secondary sort: alphabetical by title if orders are tied
+    return a.data.title.localeCompare(b.data.title);
   });
-  
-const sortedSites = sites
-  .filter(s => s.data.status !== 'Hidden')
-  .sort((a, b) => {
-    const statusA = sortOrder[a.data.status] || 99;
-    const statusB = sortOrder[b.data.status] || 99;
-    if (statusA !== statusB) return statusA - statusB;
-    return (a.data.order || 0) - (b.data.order || 0);
-  });
+
+// Group into the 5 lifecycle buckets
+const liveProjects = visibleProjects.filter(p => p.data.status === 'Live & Supported');
+const activeProjects = visibleProjects.filter(p => p.data.status === 'Active Development');
+const conceptProjects = visibleProjects.filter(p => p.data.status === 'Concept');
+const pausedProjects = visibleProjects.filter(p => p.data.status === 'Paused & Backlog');
+const archivedProjects = visibleProjects.filter(p => p.data.status === 'Archived');
 ---
 
-<BaseLayout title="brian.conway.im">
+<BaseLayout title="brian.conway.im" showNavbar={false}>
+  <div class="home-nav">
+    <div class="logo"><a href="/">brian.conway.im</a></div>
+  </div>
   
   <section class="about-section">
     <h1>Hi, I'm Brian.</h1>
     <h2>And these are my side quests.</h2>
     <p class="bio">
-      • I have a passion for building practical tools that make my daily life a little more efficient and effective.<br/>
-      • This hub showcases my technical product management skills, where I am the client, designer, builder, and tester.<br/>
-      • I own the execution from 0 to 1, leveraging AI to assist in solving problems and bringing my raw ideas to life.
+      • I have a passion for designing and building things that make life a little more efficient and effective.<br/>
+      • This hub showcases my solution architect skills, where I act as the technical authority and builder.<br/>
+      • I own the design and execution from 0 to 1, leveraging AI to assist in bringing my ideas to life.
     </p>
      <p class="bio">Feel free to reach out.</p>
     
@@ -110,28 +92,92 @@ const sortedSites = sites
 
   </section>
 
-  <hr class="divider" />
+  {liveProjects.length > 0 && (
+    <>
+      <hr class="divider" />
+      <section>
+        <h2>Live & Supported</h2>
+        <p class="section-desc">Polished, deployed solutions that I actively maintain.</p>
+        <div class="grid">
+          {liveProjects.map(p => <CardProject project={p} />)}
+        </div>
+      </section>
+    </>
+  )}
 
-  <section>
-    <h2>Projects</h2>
-    <div class="grid">
-      {sortedProjects.map(p => <CardProject project={p} />)}
-    </div>
-  </section>
+  {activeProjects.length > 0 && (
+    <>
+      <hr class="divider" />
+      <section>
+        <h2>Active Development</h2>
+        <p class="section-desc">Projects currently in the pipeline and receiving regular commits.</p>
+        <div class="grid">
+          {activeProjects.map(p => <CardProject project={p} />)}
+        </div>
+      </section>
+    </>
+  )}
 
-  <hr class="divider" />
+  {conceptProjects.length > 0 && (
+    <>
+      <hr class="divider" />
+      <section>
+        <h2>Drawing Board</h2>
+        <p class="section-desc">The place for my ideas to grow. This is where I take shower thoughts and map out the early architecture, with the goal of one day bringing them to life.</p>
+        <div class="grid">
+          {conceptProjects.map(p => <CardProject project={p} />)}
+        </div>
+      </section>
+    </>
+  )}
 
-  <section class="sites-section">
-    <h2>Sites</h2>
-    <div class="grid">
-      {sortedSites.map(s => <CardSite site={s} />)}
-    </div>
-  </section>
+  {pausedProjects.length > 0 && (
+    <>
+      <hr class="divider" />
+      <section>
+        <h2>Paused & Backlog</h2>
+        <p class="section-desc">Foundational work temporarily on hold while I focus on other priorities.</p>
+        <div class="grid">
+          {pausedProjects.map(p => <CardProject project={p} />)}
+        </div>
+      </section>
+    </>
+  )}
+
+  {archivedProjects.length > 0 && (
+    <>
+      <hr class="divider" />
+      <section>
+        <h2>The Vault</h2>
+        <p class="section-desc">Retired or archived deliverables preserved for historical reference.</p>
+        <div class="grid">
+          {archivedProjects.map(p => <CardProject project={p} />)}
+        </div>
+      </section>
+    </>
+  )}
 
 </BaseLayout>
 
 <style>
-  .about-section { margin-bottom: 3rem; margin-top: 1rem; }
+  .home-nav {
+    margin-bottom: 2.5rem;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.05em;
+  }
+  .logo a {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .logo a:hover {
+    color: var(--accent);
+  }
+  
+  .about-section { margin-bottom: 3rem; margin-top: 0; }
   h1 { font-size: 3rem; margin-bottom: 1.5rem; line-height: 1; }
   .bio { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6; max-width: none; }
   
@@ -166,7 +212,9 @@ const sortedSites = sites
 
   .divider { margin: 4rem 0; border: 0; border-top: 1px solid var(--border); }
   
-  h2 { margin-bottom: 1.5rem; font-size: 1.8rem; }
+  h2 { margin-bottom: 0.5rem; font-size: 1.8rem; }
+  .section-desc { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.5; }
+  section:last-of-type { margin-bottom: 4rem; }
   
   .grid { 
     display: grid; 

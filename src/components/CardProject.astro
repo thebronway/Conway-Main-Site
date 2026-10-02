@@ -1,7 +1,7 @@
 ---
 import StatusBadge from './StatusBadge.astro';
 const { project } = Astro.props;
-const { title, description, status, version, heroImage, demoUrl, repoUrl, url } = project.data;
+const { title, description, status, projectType, version, heroImage, demoUrl, repoUrl, url } = project.data;
 const detailsUrl = `/projects/${project.slug}/`;
 ---
 
@@ -17,6 +17,13 @@ const detailsUrl = `/projects/${project.slug}/`;
       <StatusBadge status={status} />
       {version && <span class="version-badge">{version}</span>}
     </div>
+    {projectType && projectType.length > 0 && (
+      <div class="tags-wrapper">
+        {projectType.map((type: string) => (
+          <span class="type-badge" data-type={type.toLowerCase().replace(' ', '-')}>{type}</span>
+        ))}
+      </div>
+    )}
 
     <a href={detailsUrl} class="title-link">
       <h3 class="title">{title}</h3>
@@ -87,13 +94,20 @@ const detailsUrl = `/projects/${project.slug}/`;
     color: var(--accent);
   }
 
-  .status-wrapper { 
-    margin-bottom: 1rem; 
-    display: flex;
+  .status-wrapper {
+     margin-bottom: 0.5rem;
+     display: flex;
     gap: 0.5rem;
   }
+  
+  .tags-wrapper {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
 
-  .version-badge {
+  .version-badge, .type-badge {
     display: inline-flex;
     align-items: center;
     padding: 0.25rem 0.75rem;
@@ -105,6 +119,22 @@ const detailsUrl = `/projects/${project.slug}/`;
     color: var(--text-muted);
     border: 1px solid var(--border);
     white-space: nowrap;
+  }
+  .type-badge {
+    background: transparent;
+    border-style: dashed;
+  }
+  .type-badge[data-type="hosted-site"] {
+    color: #10B981; /* Emerald */
+    border-color: rgba(16, 185, 129, 0.4);
+  }
+  .type-badge[data-type="open-source"] {
+    color: #38bdf8; /* Sky Blue */
+    border-color: rgba(56, 189, 248, 0.4);
+  }
+  .type-badge[data-type="self-hosted"] {
+    color: #c084fc; /* Purple */
+    border-color: rgba(192, 132, 252, 0.4);
   }
 
   .description {

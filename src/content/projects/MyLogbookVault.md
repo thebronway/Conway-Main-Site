@@ -2,6 +2,7 @@
 title: "MyLogbookVault"
 description: "A Pilots Self-Hosted Digital Logbook Backup and Stats"
 status: "Hidden"
+projectType: ["Open Source", "Self-Hosted"]
 heroImage: "/images/thumbnails/MyLogbookVault-card.png"
 order: 4
 version: "v0.0.0"

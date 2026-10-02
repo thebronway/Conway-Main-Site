@@ -1,92 +1,55 @@
 ---
 const { status } = Astro.props;
 
-const normalizedStatus = status ? status.toLowerCase() : 'planning';
+const normalizedStatus = status ? status.toLowerCase() : 'concept';
 
 const styles = {
-  // 1. PRODUCTION (Green)
-  'production': { 
-    bg: 'rgba(16, 185, 129, 0.1)',  
-    text: '#34d399', 
-    border: 'rgba(16, 185, 129, 0.2)', 
-    label: 'Production' 
+  // 1. LIVE & SUPPORTED (Green)
+  'live & supported': { 
+    bg: 'rgba(16, 185, 129, 0.1)', 
+    text: '#34d399',
+    border: 'rgba(16, 185, 129, 0.2)',
+    label: 'Live & Supported' 
   },
-
-  // 2. Live (Green)
-  'live': { 
-    bg: 'rgba(16, 185, 129, 0.1)',  
-    text: '#34d399', 
-    border: 'rgba(16, 185, 129, 0.2)', 
-    label: 'Live' 
-  },
-  
-  // 3. ACTIVE DEVELOPMENT (Blue)
+  // 2. ACTIVE DEVELOPMENT (Blue)
   'active development': { 
-    bg: 'rgba(56, 189, 248, 0.1)',  
-    text: '#38bdf8', 
-    border: 'rgba(56, 189, 248, 0.2)', 
+    bg: 'rgba(56, 189, 248, 0.1)', 
+    text: '#38bdf8',
+    border: 'rgba(56, 189, 248, 0.2)',
     label: 'Active Development' 
   },
-
-  // 4. Prototype (Blue)
-  'prototype': { 
-    bg: 'rgba(56, 189, 248, 0.1)',  
-    text: '#38bdf8', 
-    border: 'rgba(56, 189, 248, 0.2)', 
-    label: 'Prototype' 
+  // 3. CONCEPT (Purple)
+  'concept': { 
+    bg: 'rgba(192, 132, 252, 0.1)', 
+    text: '#c084fc',
+    border: 'rgba(192, 132, 252, 0.2)',
+    label: 'Concept' 
   },
-  
-  // 5. PLANNING (Purple)
-  'planning': { 
-    bg: 'rgba(192, 132, 252, 0.1)',  
-    text: '#c084fc', 
-    border: 'rgba(192, 132, 252, 0.2)', 
-    label: 'Planning' 
+  // 4. PAUSED & BACKLOG (Orange)
+  'paused & backlog': { 
+    bg: 'rgba(251, 146, 60, 0.1)',
+    text: '#fb923c',
+    border: 'rgba(251, 146, 60, 0.2)',
+    label: 'Paused & Backlog' 
   },
-
-  // 6. CONCEPT Phase (Purple)
-  'concept phase': { 
-    bg: 'rgba(192, 132, 252, 0.1)',  
-    text: '#c084fc', 
-    border: 'rgba(192, 132, 252, 0.2)', 
-    label: 'Concept Phase' 
-  },
-
-  // 7. PAUSED (Orange)
-  'paused': { 
-    bg: 'rgba(251, 146, 60, 0.1)', 
-    text: '#fb923c', 
-    border: 'rgba(251, 146, 60, 0.2)', 
-    label: 'Paused' 
-  },
-
-  // 8. ARCHIVED (Slate)
+  // 5. ARCHIVED (Slate)
   'archived': { 
-    bg: 'rgba(148, 163, 184, 0.1)', 
-    text: '#94a3b8', 
-    border: 'rgba(148, 163, 184, 0.2)', 
+    bg: 'rgba(148, 163, 184, 0.1)',
+    text: '#94a3b8',
+    border: 'rgba(148, 163, 184, 0.2)',
     label: 'Archived' 
   },
-  
-  // 9. CANCELLED (Red)
-  'cancelled': { 
-    bg: 'rgba(251, 113, 133, 0.1)', 
-    text: '#fb7185', 
-    border: 'rgba(251, 113, 133, 0.2)', 
-    label: 'Cancelled' 
-  },
-
-  // 10. HIDDEN (Slate)
+  // 6. HIDDEN (Slate)
   'hidden': { 
-    bg: 'rgba(148, 163, 184, 0.1)', 
-    text: '#94a3b8', 
-    border: 'rgba(148, 163, 184, 0.2)', 
-    label: 'Hidden' 
+    bg: 'rgba(148, 163, 184, 0.1)',
+    text: '#94a3b8',
+    border: 'rgba(148, 163, 184, 0.2)',
+    label: 'Hidden'
   }
 };
 
 // Fallback logic
-const currentStyle = styles[normalizedStatus] || styles.planning;
+const currentStyle = styles[normalizedStatus] || styles['concept'];
 ---
 
 <span class="badge" style={`

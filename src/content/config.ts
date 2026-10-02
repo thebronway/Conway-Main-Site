@@ -1,15 +1,11 @@
 import { defineCollection, z } from 'astro:content';
 
 const statusEnum = z.enum([
-  'Production', 
-  'Live',
-  'Active Development', 
-  'Prototype',
-  'Planning', 
-  'Concept Phase',
-  'Paused',
-  'Archived', 
-  'Cancelled',
+  'Live & Supported',
+  'Active Development',
+  'Paused & Backlog',
+  'Concept',
+  'Archived',
   'Hidden'
 ]);
 
@@ -19,6 +15,7 @@ const projectsCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     status: statusEnum,
+    projectType: z.array(z.enum(['Hosted Site', 'Open Source', 'Self-Hosted'])).optional(),
     version: z.string().optional(),
     heroImage: z.string().optional(),
     demoUrl: z.string().url().optional(),
@@ -29,21 +26,6 @@ const projectsCollection = defineCollection({
   }),
 });
 
-const sitesCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    status: statusEnum,
-    version: z.string().optional(),
-    heroImage: z.string().optional(),
-    gitUrl: z.string().url().optional(),
-    url: z.string().url().optional(),
-    order: z.number().default(0),
-  }),
-});
-
 export const collections = {
-  'projects': projectsCollection,
-  'sites': sitesCollection
+  'projects': projectsCollection
 };
