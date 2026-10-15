@@ -1,11 +1,19 @@
 import { defineCollection, z } from 'astro:content';
 
 const statusEnum = z.enum([
-  'Live & Supported',
-  'Active Development',
-  'Paused & Backlog',
+  'Stable',
+  'Live',
+  'Early Build',
+  'Active Roadmap',
+  'Backburnered',
+  'Maintenance Mode',
   'Concept',
+  'Feature Spec',
+  'Paused',
+  'On Hold',
+  'Under Review',
   'Archived',
+  'Deprecated',
   'Hidden'
 ]);
 

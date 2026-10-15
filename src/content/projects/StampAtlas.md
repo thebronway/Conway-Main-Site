@@ -1,7 +1,7 @@
 ---
 title: "StampAtlas"
 description: "A Social Passport Travel App"
-status: "Concept"
+status: "Feature Spec"
 projectType: ["Hosted Site"]
 heroImage: "/images/thumbnails/StampAtlas-card.png"
 order: 1

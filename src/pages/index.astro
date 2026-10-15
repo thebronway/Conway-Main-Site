@@ -44,12 +44,19 @@ const visibleProjects = projects
     return a.data.title.localeCompare(b.data.title);
   });
 
-// Group into the 5 lifecycle buckets
-const liveProjects = visibleProjects.filter(p => p.data.status === 'Live & Supported');
-const activeProjects = visibleProjects.filter(p => p.data.status === 'Active Development');
-const conceptProjects = visibleProjects.filter(p => p.data.status === 'Concept');
-const pausedProjects = visibleProjects.filter(p => p.data.status === 'Paused & Backlog');
-const archivedProjects = visibleProjects.filter(p => p.data.status === 'Archived');
+// Group into the 4 lifecycle buckets
+const featuredProjects = visibleProjects.filter(p => 
+  ['Stable', 'Live', 'Early Build', 'Active Roadmap', 'Backburnered', 'Maintenance Mode'].includes(p.data.status)
+);
+const drawingBoardProjects = visibleProjects.filter(p => 
+  ['Concept', 'Feature Spec'].includes(p.data.status)
+);
+const pausedProjects = visibleProjects.filter(p => 
+  ['Paused', 'On Hold', 'Under Review'].includes(p.data.status)
+);
+const vaultProjects = visibleProjects.filter(p => 
+  ['Archived', 'Deprecated'].includes(p.data.status)
+);
 ---
 
 <BaseLayout title="brian.conway.im" showNavbar={false}>
@@ -92,40 +99,27 @@ const archivedProjects = visibleProjects.filter(p => p.data.status === 'Archived
 
   </section>
 
-  {liveProjects.length > 0 && (
+  {featuredProjects.length > 0 && (
     <>
       <hr class="divider" />
       <section>
-        <h2>Live & Supported</h2>
+        <h2>Featured Projects</h2>
         <p class="section-desc">Polished, deployed solutions that I actively maintain.</p>
         <div class="grid">
-          {liveProjects.map(p => <CardProject project={p} />)}
+          {featuredProjects.map(p => <CardProject project={p} />)}
         </div>
       </section>
     </>
   )}
-
-  {activeProjects.length > 0 && (
+  
+  {drawingBoardProjects.length > 0 && (
     <>
       <hr class="divider" />
       <section>
-        <h2>Active Development</h2>
-        <p class="section-desc">Projects currently in the pipeline and receiving regular commits.</p>
-        <div class="grid">
-          {activeProjects.map(p => <CardProject project={p} />)}
-        </div>
-      </section>
-    </>
-  )}
-
-  {conceptProjects.length > 0 && (
-    <>
-      <hr class="divider" />
-      <section>
-        <h2>Drawing Board</h2>
+        <h2>The Drawing Board</h2>
         <p class="section-desc">The place for my ideas to grow. This is where I take shower thoughts and map out the early architecture, with the goal of one day bringing them to life.</p>
         <div class="grid">
-          {conceptProjects.map(p => <CardProject project={p} />)}
+          {drawingBoardProjects.map(p => <CardProject project={p} />)}
         </div>
       </section>
     </>
@@ -135,7 +129,7 @@ const archivedProjects = visibleProjects.filter(p => p.data.status === 'Archived
     <>
       <hr class="divider" />
       <section>
-        <h2>Paused & Backlog</h2>
+        <h2>Paused Projects</h2>
         <p class="section-desc">Foundational work temporarily on hold while I focus on other priorities.</p>
         <div class="grid">
           {pausedProjects.map(p => <CardProject project={p} />)}
@@ -144,14 +138,14 @@ const archivedProjects = visibleProjects.filter(p => p.data.status === 'Archived
     </>
   )}
 
-  {archivedProjects.length > 0 && (
+  {vaultProjects.length > 0 && (
     <>
       <hr class="divider" />
       <section>
         <h2>The Vault</h2>
         <p class="section-desc">Retired or archived deliverables preserved for historical reference.</p>
         <div class="grid">
-          {archivedProjects.map(p => <CardProject project={p} />)}
+          {vaultProjects.map(p => <CardProject project={p} />)}
         </div>
       </section>
     </>

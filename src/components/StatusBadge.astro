@@ -4,48 +4,29 @@ const { status } = Astro.props;
 const normalizedStatus = status ? status.toLowerCase() : 'concept';
 
 const styles = {
-  // 1. LIVE & SUPPORTED (Green)
-  'live & supported': { 
-    bg: 'rgba(16, 185, 129, 0.1)', 
-    text: '#34d399',
-    border: 'rgba(16, 185, 129, 0.2)',
-    label: 'Live & Supported' 
-  },
-  // 2. ACTIVE DEVELOPMENT (Blue)
-  'active development': { 
-    bg: 'rgba(56, 189, 248, 0.1)', 
-    text: '#38bdf8',
-    border: 'rgba(56, 189, 248, 0.2)',
-    label: 'Active Development' 
-  },
-  // 3. CONCEPT (Purple)
-  'concept': { 
-    bg: 'rgba(192, 132, 252, 0.1)', 
-    text: '#c084fc',
-    border: 'rgba(192, 132, 252, 0.2)',
-    label: 'Concept' 
-  },
-  // 4. PAUSED & BACKLOG (Orange)
-  'paused & backlog': { 
-    bg: 'rgba(251, 146, 60, 0.1)',
-    text: '#fb923c',
-    border: 'rgba(251, 146, 60, 0.2)',
-    label: 'Paused & Backlog' 
-  },
-  // 5. ARCHIVED (Slate)
-  'archived': { 
-    bg: 'rgba(148, 163, 184, 0.1)',
-    text: '#94a3b8',
-    border: 'rgba(148, 163, 184, 0.2)',
-    label: 'Archived' 
-  },
-  // 6. HIDDEN (Slate)
-  'hidden': { 
-    bg: 'rgba(148, 163, 184, 0.1)',
-    text: '#94a3b8',
-    border: 'rgba(148, 163, 184, 0.2)',
-    label: 'Hidden'
-  }
+  // Featured Projects
+  'stable': { bg: 'rgba(16, 185, 129, 0.1)', text: '#10b981', border: 'rgba(16, 185, 129, 0.2)', label: 'Stable' },
+  'live': { bg: 'rgba(16, 185, 129, 0.1)', text: '#10b981', border: 'rgba(16, 185, 129, 0.2)', label: 'Live' },
+  'early build': { bg: 'rgba(56, 189, 248, 0.1)', text: '#38bdf8', border: 'rgba(56, 189, 248, 0.2)', label: 'Early Build' },
+  'active roadmap': { bg: 'rgba(59, 130, 246, 0.1)', text: '#3b82f6', border: 'rgba(59, 130, 246, 0.2)', label: 'Active Roadmap' },
+  'backburnered': { bg: 'rgba(29, 78, 216, 0.1)', text: '#1d4ed8', border: 'rgba(29, 78, 216, 0.2)', label: 'Backburnered' },
+  'maintenance mode': { bg: 'rgba(4, 120, 87, 0.1)', text: '#047857', border: 'rgba(4, 120, 87, 0.2)', label: 'Maintenance Mode' },
+  
+  // The Drawing Board
+  'concept': { bg: 'rgba(236, 72, 153, 0.1)', text: '#ec4899', border: 'rgba(236, 72, 153, 0.2)', label: 'Concept' },
+  'feature spec': { bg: 'rgba(190, 24, 93, 0.1)', text: '#be185d', border: 'rgba(190, 24, 93, 0.2)', label: 'Feature Spec' },
+  
+  // Paused Projects
+  'paused': { bg: 'rgba(148, 163, 184, 0.1)', text: '#94a3b8', border: 'rgba(148, 163, 184, 0.2)', label: 'Paused' },
+  'on hold': { bg: 'rgba(148, 163, 184, 0.1)', text: '#94a3b8', border: 'rgba(148, 163, 184, 0.2)', label: 'On Hold' },
+  'under review': { bg: 'rgba(239, 68, 68, 0.1)', text: '#ef4444', border: 'rgba(239, 68, 68, 0.2)', label: 'Under Review' },
+  
+  // The Vault
+  'archived': { bg: 'rgba(148, 163, 184, 0.1)', text: '#94a3b8', border: 'rgba(148, 163, 184, 0.2)', label: 'Archived' },
+  'deprecated': { bg: 'rgba(148, 163, 184, 0.1)', text: '#94a3b8', border: 'rgba(148, 163, 184, 0.2)', label: 'Deprecated' },
+  
+  // Hidden
+  'hidden': { bg: 'rgba(148, 163, 184, 0.1)', text: '#94a3b8', border: 'rgba(148, 163, 184, 0.2)', label: 'Hidden' }
 };
 
 // Fallback logic

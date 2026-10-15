@@ -1,7 +1,7 @@
 ---
 title: "mudrun101"
 description: "An OCR Mud Run Guide"
-status: "Hidden"
+status: "Under Review"
 projectType: ["Hosted Site"]
 heroImage: "/images/thumbnails/mudrun101-card.png"
 order: 1
