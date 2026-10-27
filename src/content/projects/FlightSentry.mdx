@@ -1,0 +1,28 @@
+---
+title: "FlightSentry"
+description: "A self-hosted flight price tracker that monitors flight prices and sends alerts when fares drop"
+status: "Active Roadmap"
+projectType: ["Self-Hosted", "Open Source"]
+gitUrl: "https://github.com/thebronway/FlightSentry"
+dockerUrl: "https://hub.docker.com/r/thebronway/flightsentry"
+heroImage: "/images/thumbnails/FlightSentry-card.webp"
+order: 3
+version: "fetch"
+---
+import Tabs from '../../components/Tabs.astro';
+import TabItem from '../../components/TabItem.astro';
+import GitHubMarkdown from '../../components/GitHubMarkdown.astro';
+
+<Tabs>
+  <TabItem label="README">
+    <GitHubMarkdown owner="thebronway" repo="FlightSentry" path="README.md" />
+  </TabItem>
+
+  <TabItem label="CHANGELOG">
+    <GitHubMarkdown owner="thebronway" repo="FlightSentry" path="CHANGELOG.md" />
+  </TabItem>
+
+  <TabItem label="ROADMAP">
+    <GitHubMarkdown owner="thebronway" repo="FlightSentry" path="ROADMAP.md" />
+  </TabItem>
+</Tabs>

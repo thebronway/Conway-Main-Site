@@ -130,7 +130,7 @@ const vaultProjects = visibleProjects.filter(p =>
       <hr class="divider" />
       <section>
         <h2>Paused Projects</h2>
-        <p class="section-desc">Foundational work temporarily on hold while I focus on other priorities.</p>
+        <p class="section-desc">Projects in limbo. Deciding which ones already served their purpose teaching me something new, and which ones looked a lot better on paper than in practice.</p>
         <div class="grid">
           {pausedProjects.map(p => <CardProject project={p} />)}
         </div>
@@ -143,7 +143,7 @@ const vaultProjects = visibleProjects.filter(p =>
       <hr class="divider" />
       <section>
         <h2>The Vault</h2>
-        <p class="section-desc">Retired or archived deliverables preserved for historical reference.</p>
+        <p class="section-desc">Retired or archived projects preserved for historical reference or nostalgia.</p>
         <div class="grid">
           {vaultProjects.map(p => <CardProject project={p} />)}
         </div>
