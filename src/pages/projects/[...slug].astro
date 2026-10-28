@@ -68,6 +68,13 @@ const visitUrl = entry.data.url;
           ))}
         </div>
       )}
+      {entry.data.tech && entry.data.tech.length > 0 && (
+        <div class="tech-wrapper">
+          {entry.data.tech.map((item: string) => (
+            <span class="tech-badge">{item}</span>
+          ))}
+        </div>
+      )}
 
       <h1>{entry.data.title}</h1>
       
@@ -153,7 +160,33 @@ const visitUrl = entry.data.url;
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tags-wrapper:has(+ h1) {
     margin-bottom: 1rem;
+  }
+
+  .tech-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    background: rgba(255, 255, 255, 0.04);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
   }
 
   .version-badge, .type-badge {

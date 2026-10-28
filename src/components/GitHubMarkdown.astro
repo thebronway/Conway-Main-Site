@@ -1,57 +1,46 @@
 ---
+import { marked } from 'marked';
+
 const { owner, repo, path, branch = "main" } = Astro.props;
 
-// 1. Target the raw file on GitHub
+// 1. Target the raw file on GitHub (not rate-limited)
 const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
 let htmlContent = "";
 
 try {
   const response = await fetch(rawUrl);
-  if (!response.ok) throw new Error(`Failed to fetch ${rawUrl}`);
+  if (!response.ok) throw new Error(`Failed to fetch ${rawUrl} (Status: ${response.status})`);
   const rawMarkdown = await response.text();
 
-  // 2. Use GitHub's official API to compile the Markdown into HTML
-  const apiResponse = await fetch("https://api.github.com/markdown", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "User-Agent": "Astro-Build" // GitHub API requires a User-Agent header
-    },
-    body: JSON.stringify({ text: rawMarkdown })
-  });
+  // 2. Parse Markdown to HTML locally at build time
+  let rawHtml = await marked.parse(rawMarkdown);
+  const baseLinkUrl = `https://github.com/${owner}/${repo}/blob/${branch}/${path}`;
+  const baseSrcUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
 
-  if (apiResponse.ok) {
-    let rawHtml = await apiResponse.text();
-    const baseLinkUrl = `https://github.com/${owner}/${repo}/blob/${branch}/${path}`;
-    const baseSrcUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
-
-    rawHtml = rawHtml.replace(/href="([^"]+)"/g, (match, link) => {
-      if (link.startsWith('#')) {
-        return match;
-      }
-      let absoluteUrl = link;
-      if (!/^(https?:|mailto:|tel:)/i.test(link)) {
-        try {
-          absoluteUrl = new URL(link, baseLinkUrl).href;
-        } catch {
-          return match;
-        }
-      }
-      return `href="${absoluteUrl}" target="_blank" rel="noopener noreferrer"`;
-    });
-
-    rawHtml = rawHtml.replace(/src="(?!(https?:|data:))([^"]+)"/g, (match, proto, src) => {
+  rawHtml = rawHtml.replace(/href="([^"]+)"/g, (match, link) => {
+    if (link.startsWith('#')) {
+      return match;
+    }
+    let absoluteUrl = link;
+    if (!/^(https?:|mailto:|tel:)/i.test(link)) {
       try {
-        return `src="${new URL(src, baseSrcUrl).href}"`;
+        absoluteUrl = new URL(link, baseLinkUrl).href;
       } catch {
         return match;
       }
-    });
+    }
+    return `href="${absoluteUrl}" target="_blank" rel="noopener noreferrer"`;
+  });
 
-    htmlContent = rawHtml;
-  } else {
-    htmlContent = `<p style="color: red;">Error rendering markdown from GitHub API.</p>`;
-  }
+  rawHtml = rawHtml.replace(/src="(?!(https?:|data:))([^"]+)"/g, (match, proto, src) => {
+    try {
+      return `src="${new URL(src, baseSrcUrl).href}"`;
+    } catch {
+      return match;
+    }
+  });
+
+  htmlContent = rawHtml;
 } catch (error) {
   console.error(error);
   htmlContent = `<p style="color: red;">Could not load remote markdown file.</p>`;
