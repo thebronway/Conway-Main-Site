@@ -3,9 +3,8 @@ title: "mudrun101"
 description: "An OCR Mud Run Guide"
 status: "Under Review"
 projectType: ["Hosted Site"]
-heroImage: "/images/thumbnails/mudrun101-card.png"
-order: 1
-version: "v0.0.0"
+heroImage: "/images/thumbnails/mudrun101-thumb.webp"
+order: 2
 ---
 # An OCR Mud Run Guide
 

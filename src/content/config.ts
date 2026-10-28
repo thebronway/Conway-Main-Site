@@ -24,6 +24,7 @@ const projectsCollection = defineCollection({
     description: z.string(),
     status: statusEnum,
     projectType: z.array(z.enum(['Hosted Site', 'Open Source', 'Self-Hosted'])).optional(),
+    tech: z.array(z.string()).optional(),
     version: z.string().optional(),
     heroImage: z.string().optional(),
     demoUrl: z.string().url().optional(),

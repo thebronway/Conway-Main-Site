@@ -2,11 +2,11 @@
 title: "My FlyTo25 Challenge"
 status: "Archived"
 projectType: ["Hosted Site"]
+tech: ["HTML"]
 description: "My jetBlue 25 for 25 Challenge Website Archive"
 url: "https://flyto25.conway.im"
-heroImage: "/images/thumbnails/flyto25-card.png"
+heroImage: "/images/thumbnails/flyto25-thumb.webp"
 order: 1
-version: "v1.0.0"
 ---
 # My jetBlue 25 for 25 Challenge Website Archive
 
