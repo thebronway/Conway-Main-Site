@@ -5,7 +5,8 @@ projectType: ["Hosted Site"]
 tech: ["HTML"]
 description: "My jetBlue 25 for 25 Challenge Website Archive"
 url: "https://flyto25.conway.im"
-heroImage: "/images/thumbnails/flyto25-thumb.webp"
+heroImage: "/images/thumbnails/flyto25-icon.png"
+projectImage: "/images/thumbnails/flyto25-logo.png"
 order: 1
 ---
 # My jetBlue 25 for 25 Challenge Website Archive

@@ -3,7 +3,8 @@ title: "Switchboard"
 description: "Identity & Access Management (IAM) Dashboard for Homelabs & Self-Hosted Environments"
 status: "Concept"
 projectType: ["Self-Hosted", "Open Source"]
-heroImage: "/images/thumbnails/Switchboard-thumb.webp"
+heroImage: "/images/thumbnails/Switchboard-icon.png"
+projectImage: "/images/thumbnails/Switchboard-logo.png"
 order: 3
 ---
 # Identity & Access Management (IAM) Dashboard for Homelabs & Self-Hosted Environments

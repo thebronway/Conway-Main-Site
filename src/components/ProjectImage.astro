@@ -1,0 +1,55 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  variant?: 'card' | 'hero';
+  aspect?: 'square' | 'wide';
+}
+
+const { src, alt, variant = 'card', aspect = 'square' } = Astro.props;
+---
+
+<div class:list={['project-image-frame', `variant-${variant}`, `aspect-${aspect}`]}>
+  <img
+    src={src}
+    alt={alt}
+    class="project-image"
+    loading={variant === 'hero' ? 'eager' : 'lazy'}
+    decoding="async"
+  />
+</div>
+
+<style>
+  .project-image-frame {
+    --frame-padding: 12%;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    box-sizing: border-box;
+    padding: var(--frame-padding);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .variant-card {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .variant-hero {
+    border-radius: 12px;
+  }
+
+  .aspect-wide {
+    aspect-ratio: 2 / 1;
+    padding: calc(var(--frame-padding) / 2);
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+</style>

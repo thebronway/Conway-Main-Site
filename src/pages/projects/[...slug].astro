@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StatusBadge from '../../components/StatusBadge.astro';
+import ProjectImage from '../../components/ProjectImage.astro';
 import { Icon } from 'astro-icon/components';
 
 export async function getStaticPaths() {
@@ -39,6 +40,8 @@ async function resolveVersion(gitUrl: string | undefined, versionField: string |
 const version = await resolveVersion(entry.data.gitUrl, entry.data.version);
 const { Content } = await entry.render();
 const visitUrl = entry.data.url;
+const displayImage = entry.data.projectImage || entry.data.heroImage;
+const isWideImage = Boolean(entry.data.projectImage);
 ---
 
 <BaseLayout title={entry.data.title} showNavbar={false}>
@@ -48,13 +51,16 @@ const visitUrl = entry.data.url;
       <Icon name="tabler:arrow-left" class="btn-icon" /> Back to Home
     </a>
   </div>
-  <div class="hero-container">
-    {entry.data.heroImage && (
-      <img 
-        src={entry.data.heroImage} 
-        alt={entry.data.title} 
-        class="hero-image" 
-      />
+  <div class:list={['hero-container', { 'is-wide': isWideImage }]}>
+    {displayImage && (
+      <div class:list={['hero-image-wrapper', { 'is-wide': isWideImage }]}>
+        <ProjectImage
+          src={displayImage}
+          alt={entry.data.title}
+          variant="hero"
+          aspect={isWideImage ? 'wide' : 'square'}
+        />
+      </div>
     )}
     <div class="hero-content">
       <div class="status-wrapper">
@@ -118,19 +124,29 @@ const visitUrl = entry.data.url;
     margin-bottom: 2rem;
   }
 
-  .hero-image {
+  .hero-image-wrapper {
     width: 300px;
-    height: auto;
-    border-radius: 12px;
-    object-fit: cover;
     flex-shrink: 0;
+  }
+
+  .hero-image-wrapper.is-wide {
+    width: 600px;
+  }
+
+  @media (max-width: 960px) {
+    .hero-container.is-wide {
+      flex-direction: column;
+    }
+    .hero-image-wrapper.is-wide {
+      width: 100%;
+    }
   }
 
   @media (max-width: 768px) {
     .hero-container {
       flex-direction: column;
     }
-    .hero-image {
+    .hero-image-wrapper {
       width: 100%;
     }
     .button-group {

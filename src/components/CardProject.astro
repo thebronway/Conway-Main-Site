@@ -1,5 +1,6 @@
 ---
 import StatusBadge from './StatusBadge.astro';
+import ProjectImage from './ProjectImage.astro';
 const { project } = Astro.props;
 const { title, description, status, projectType, tech, version, heroImage, demoUrl, repoUrl, url } = project.data;
 const detailsUrl = `/projects/${project.slug}/`;
@@ -8,7 +9,7 @@ const detailsUrl = `/projects/${project.slug}/`;
 <div class="card">
   {heroImage && (
     <a href={detailsUrl} class="image-link">
-      <img src={heroImage} alt={title} class="hero-image" />
+      <ProjectImage src={heroImage} alt={title} variant="card" />
     </a>
   )}
   
@@ -68,14 +69,6 @@ const detailsUrl = `/projects/${project.slug}/`;
 
   .image-link {
     display: block; /* Ensures the link wraps the image correctly */
-  }
-
-  .hero-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    object-fit: cover;
-    border-bottom: 1px solid var(--border);
   }
 
   .content {
