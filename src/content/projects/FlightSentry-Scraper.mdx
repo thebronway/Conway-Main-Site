@@ -1,0 +1,33 @@
+---
+title: "FlightSentry-Scraper"
+description: "A self-hosted flight price tracker that monitors flight prices and sends alerts when fares drop"
+status: "Active Roadmap"
+projectType: ["Self-Hosted", "Open Source"]
+tech: ["React", "TypeScript", "Next.js"]
+gitUrl: "https://github.com/thebronway/FlightSentry-Scraper"
+dockerUrl: "https://hub.docker.com/r/thebronway/flightsentry-scraper"
+heroImage: "/images/thumbnails/FlightSentry-thumb.webp"
+order: 6
+version: "fetch"
+---
+import Tabs from '../../components/Tabs.astro';
+import TabItem from '../../components/TabItem.astro';
+import GitHubMarkdown from '../../components/GitHubMarkdown.astro';
+
+<Tabs>
+  <TabItem label="README">
+    <GitHubMarkdown owner="thebronway" repo="FlightSentry-Scraper" path="README.md" />
+  </TabItem>
+
+  <TabItem label="API Specs">
+    <GitHubMarkdown owner="thebronway" repo="FlightSentry-Scraper" path="docs/API_SPEC.md" />
+  </TabItem>
+
+  <TabItem label="CHANGELOG">
+    <GitHubMarkdown owner="thebronway" repo="FlightSentry-Scraper" path="CHANGELOG.md" />
+  </TabItem>
+
+  <TabItem label="ROADMAP">
+    <GitHubMarkdown owner="thebronway" repo="FlightSentry-Scraper" path="ROADMAP.md" />
+  </TabItem>
+</Tabs>
